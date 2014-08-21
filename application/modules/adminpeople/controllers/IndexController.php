@@ -76,22 +76,11 @@ class Adminpeople_IndexController extends Sydney_Controller_Action
         }
 
         $this->view->embed = true;
-        $this->view->addiScript = '<script>
-				var oPaginator;
-				$(function() {
-					if($("#peoplelisting").length > 0) oPaginator = $("#peoplelisting").paginator( {
-					\'embeded\' : \'' . $r->embed . '\',
-					\'context\' : \'' . $context . '\',
-					\'filter\' : \'' . $filter . '\',
-					\'mode\' : \'' . $mode . '\',
-					\'ajaxurl_displayresult\' : \'/adminpeople/services/displaypeople\',
-				});
-				$(".edefiles").css("background","#DDD");
-				$(".contentEditor > li.editing").css("padding-top","5px");
-			});
-		</script>';
-        // END - paginator
 
+        $this->view->scriptParamEmbed = $r->embed;
+        $this->view->scriptParamContext = $context;
+        $this->view->scriptParamFilter = $filter;
+        $this->view->scriptParamMode = $mode;
     }
 
     /**
