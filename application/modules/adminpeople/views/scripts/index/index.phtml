@@ -1,55 +1,3 @@
-<style>
-    #content .subBox {
-        padding-bottom: 1px;
-        padding-left: 96px;
-        padding-top: 1px;
-        margin: 3px;
-        width: 300px;
-        float: left;
-    }
-
-    .fieldValueList li p {
-        padding: 11px 0 11px 80px;
-    }
-
-    .fieldValueList li label {
-        width: 80px;
-    }
-
-    #content .subBox .fieldValueList {
-        height: 86px;
-        overflow: auto;
-    }
-
-    #content .subBox a.avatar {
-        display: block;
-        float: left;
-        margin-left: -80px;
-        margin-top: 15px;
-        position: relative;
-    }
-
-    #content .subBox a.avatar img {
-        border: 2px solid #CCCCCC;
-    }
-
-    .paging {
-        font-size: 11px;
-        line-height: 1.2;
-        margin: 15px 16px 19px;
-        padding-top: 4px;
-        text-align: center;
-    }
-
-    .smallchars {
-        font-size: 10px;
-    }
-
-    #peopdialog {
-        background-image: none;
-        background: #E8E8E8;
-    }
-</style>
 <?php
 if (isset($this->sydneylayout) && $this->sydneylayout == 'no') {
     $nolayout = true;
@@ -99,37 +47,44 @@ if (isset($this->sydneylayout) && $this->sydneylayout == 'no') {
     });
 </script>
 
+
+
+
+
 <div id="peopdialog"></div>
 <div class="sydney_editor_toolbar">
-    <form>
-        <div>
-            <label
-                for="fstatus"><?php echo Sydney_Tools_Localization::_('Status filter'); ?></label>
-            <select id="fstatus" name="fstatus" class="smallchars">
-                <option
-                    value=""><?php echo Sydney_Tools_Localization::_('All'); ?></option>
-                <option
-                    value="1"><?php echo Sydney_Tools_Localization::_('Active'); ?></option>
-                <option
-                    value="0"><?php echo Sydney_Tools_Localization::_('De-Activated'); ?></option>
-            </select>
-        </div>
-        <div>
-            <label for="fgroup">Group filter</label>
-            <select id="fgroup" name="fgroup" class="smallchars">
-                <option value="">All</option>
-                <?php foreach ($this->groups as $k => $v) : ?>
+    <form class="form-horizontal" role="form">
+        <div class="form-group col-sm-4">
+            <label for="fstatus" class="col-sm-4 control-label"><?php echo Sydney_Tools_Localization::_('Status filter'); ?></label>
+            <div class="col-sm-8">
+                <select id="fstatus" name="fstatus" class="form-control">
                     <option
-                        value="<?php echo $k; ?>" <?php if (isset($this->r->fgroup) && $this->r->fgroup === (string)$k) {
-                        echo 'selected';
-                    } ?>><?php echo $v; ?></option>
-                <?php endforeach; ?>
-            </select>
+                        value=""><?php echo Sydney_Tools_Localization::_('All'); ?></option>
+                    <option
+                        value="1"><?php echo Sydney_Tools_Localization::_('Active'); ?></option>
+                    <option
+                        value="0"><?php echo Sydney_Tools_Localization::_('De-Activated'); ?></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-sm-4">
+            <label for="fgroup" class="col-sm-4 control-label">Group filter</label>
+            <div class="col-sm-8">
+                <select id="fgroup" name="fgroup" class="form-control">
+                    <option value="">All</option>
+                    <?php foreach ($this->groups as $k => $v) : ?>
+                        <option
+                            value="<?php echo $k; ?>" <?php if (isset($this->r->fgroup) && $this->r->fgroup === (string)$k) {
+                            echo 'selected';
+                        } ?>><?php echo $v; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
         </div>
     </form>
 </div>
-<?php
 
+<?php
 $minfo = array(
     array(Sydney_Tools_Localization::_('Email'), 'login'),
     array(Sydney_Tools_Localization::_('Phone'), 'phone'),
@@ -142,71 +97,89 @@ $capsules = array(
 
 ?>
 
-<ul xmlns="http://www.w3.org/1999/xhtml" class="sydney_editor_paging">
-    <ul>
-        <li><a href="#"
-               id="prevbut-header"><?= Sydney_Tools_Localization::_('Previous items') ?></a><a
-                id="prevbuto-header"><?= Sydney_Tools_Localization::_('Previous items') ?></a>
-        </li>
-        <li><a href="#"
-               id="nextbut-header"><?= Sydney_Tools_Localization::_('Next items') ?></a><a
-                id="nextbuto-header"><?= Sydney_Tools_Localization::_('Next items') ?></a>
-        </li>
-    </ul>
+<div class="panel col-sm-12">
+    <div class="pull-left">
+        <a class="btn btn-outline btn-primary" href="#" id="prevbut-header"><i class="fa fa-chevron-left fa-fw"></i><?= Sydney_Tools_Localization::_('Previous items') ?></a>
+    </div>
+    <div class="pull-right">
+        <a class="btn btn-outline btn-primary" href="#" id="nextbut-header"><?= Sydney_Tools_Localization::_('Next items') ?><i class="fa fa-chevron-right fa-fw"></i></a>
+    </div>
 
     <div id="pagination-header">
     </div>
+</div>
 
-</ul>
 
-<ul id="peoplelisting" class="box clearfix">
+<div id="peoplelisting col-sm-12">
+    <div class="row">
     <?php foreach ($this->people as $p) : ?>
-        <li class="subBox userid<?php echo $p['id']; ?>">
-            <a class="avatar"
-               href="/adminpeople/index/editindex/id/<?php echo $p['id']; ?>">
-                <?php
-                // Display avatar
-                if ($p['avatar'] > 0) {
-                    $avatar = '/adminfiles/file/thumb/id/' . $p['avatar'] . '/ts/1/fn/' . $p['avatar'] . '.png';
-                } else {
-                    $avatar = $this->cdnurl . '/sydneyassets/images/image64.png';
-                }
-                echo '<img width="64" height="64" src="' . $avatar . '"/>';
-                ?>
-
-            </a>
-
-            <h2>
-                <a href="/adminpeople/index/editindex/id/<?php echo $p['id']; ?>"><?php echo $p['fname'] . ' ' . $p['lname']; ?></a>
-                <?php echo $capsules[($p['active'])]; ?>
-                <span
-                    class="subheading"><?php echo ucfirst($p['usersgroups_name']); ?></span>
-            </h2>
-            <ul class="fieldValueList">
-                <?php foreach ($minfo as $m): ?>
+        <?php
+        if (ucfirst($p['usersgroups_name']) == 'Developer'){
+            $panelColor='primary';
+        }
+        elseif(ucfirst($p['usersgroups_name']) == 'Guest'){
+            $panelColor='info';
+        }
+        elseif(ucfirst($p['usersgroups_name']) == 'Authuser'){
+            $panelColor='warning';
+        }
+        elseif(ucfirst($p['usersgroups_name']) == 'Administrator'){
+            $panelColor='danger';
+        }
+        elseif(ucfirst($p['usersgroups_name']) == 'Superadministrator'){
+            $panelColor='red';
+        }
+        else{
+            $panelColor='default';
+        }; ?>
+        <div class="userid<?php echo $p['id']; ?> col-lg-4">
+        <div class="panel panel-<?php echo $panelColor; ?>">
+            <div class="panel-heading">
+                    <strong><?php echo $p['fname'] . ' ' . $p['lname']; ?></strong>
+                    <?php echo $capsules[($p['active'])]; ?>
+                    <span class="small"><?php echo ucfirst($p['usersgroups_name']); ?></span>
+            </div>
+            <div class="panel-body">
+                <div class="col-lg-3">
+                <button class="btn btn-<?php echo $panelColor; ?> btn-circle btn-xl" type="button">
                     <?php
-                    $val = $p[($m[1])];
-                    if ($val != '' && $val != '0'):
-                        ?>
-                        <li><label><?php echo $m[0]; ?></label>
-
-                            <p><?php echo $val; ?></p></li>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </ul>
-            <p class="buttons">
-                <a class="button vdetailb"
-                   href="/adminpeople/index/profile/id/<?php echo $p['id']; ?>">View
-                    details</a>
-                <a class="button muted"
-                   href="/adminpeople/index/editindex/id/<?php echo $p['id']; ?>">Edit</a>
-                <?php if ($this->users_id != $p['id']) { ?>
-                    <a class="button warning delete peodeleteb"
-                       href="/adminpeople/services/delete/id/<?php echo $p['id']; ?>/format/json">Delete</a>
-                <?php } ?>
-            </p>
-            <br><br>
-        </li>
+                    // Display avatar
+                    if ($p['avatar'] > 0) {
+                        $avatar = '/adminfiles/file/thumb/id/' . $p['avatar'] . '/ts/1/fn/' . $p['avatar'] . '.png';
+                        echo '<img width="64" height="64" class="img-circle" src="' . $avatar . '"/>';
+                    } else {
+                        echo '<i class="fa fa-user"></i>';
+                    }
+                    ?>
+                </button>
+                </div>
+                <div class="col-lg-8">
+                    <div>
+                        <?php foreach ($minfo as $m): ?>
+                            <?php
+                            $val = $p[($m[1])];
+                            if ($val != '' && $val != '0'):
+                                ?>
+                                <p class="text-<?= $panelColor?>">
+                                    <label><?php echo $m[0]; ?></label>
+                                    <?php echo $val; ?>
+                                </p>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                    <a class="btn btn-primary"
+                       href="/adminpeople/index/profile/id/<?php echo $p['id']; ?>"><i class="fa fa-info fa-fw"></i> View details</a>
+                    <a class="btn btn-success"
+                       href="/adminpeople/index/editindex/id/<?php echo $p['id']; ?>"><i class="fa fa-edit fa-fw"></i> Edit</a>
+                    <?php if ($this->users_id != $p['id']) { ?>
+                        <a class="btn btn-danger" href="/adminpeople/services/delete/id/<?php echo $p['id']; ?>/format/json"><i class="fa fa-trash-o fa-fw"></i>Delete</a>
+                    <?php } ?>
+            </div>
+        </div>
+    </div>
     <?php endforeach; ?>
-</ul>
+</div>
 <?php echo $this->addiScript; ?>
