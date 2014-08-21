@@ -22,7 +22,7 @@ $settingsNms = new Zend_Session_Namespace('appSettings');
 		</script>
 
 		<?php echo $this->headStyle(); ?>
-		<?php echo $this->headScript(); ?>
+
 		<?php echo $this->headLink(); ?>
 
         <!-- Bootstrap Core CSS -->
@@ -210,5 +210,6 @@ $settingsNms = new Zend_Session_Namespace('appSettings');
     <!-- Custom Theme JavaScript -->
     <script src="sydneyassets/vendor/sb-admin/js/sb-admin-2.js"></script>
 
+    <?php echo $this->headScript(); ?>
 </body>
 </html>

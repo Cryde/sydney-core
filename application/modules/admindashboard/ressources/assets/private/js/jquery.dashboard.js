@@ -14,13 +14,14 @@
 		dashboardDiv = $(this);
 		$('#selectDashboardListActivities').change(function(event){
 			// dashboardDiv.prepend('Loading...');
-			$(opts.ajaxboxid).msgbox({ 'showtime': 0, 'modal': true, 'message':'Loading...' });
+			//$(opts.ajaxboxid).msgbox({ 'showtime': 0, 'modal': true, 'message':'Loading...' });
 			$.post("/admindashboard/services/getlistactivities", { user: $(this).val()}, function (data) {
-				$(opts.ajaxboxid).msgbox({ 'showtime': 1, 'modal': false, 'message':'OK' });
+				//$(opts.ajaxboxid).msgbox({ 'showtime': 1, 'modal': false, 'message':'OK' });
 				dashboardDiv.html(data);
 			});
 		});
 		return $(this);
 	};
 
+    $('#dashboardListActivities').dashboard();
 })(jQuery);
