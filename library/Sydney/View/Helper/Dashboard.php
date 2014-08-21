@@ -21,55 +21,38 @@ class Sydney_View_Helper_Dashboard extends Zend_View_Helper_Abstract
     public function Dashboard($listactivities)
     {
         $html = '';
+        $invertedCpt = 1;
         foreach ($listactivities['time'] as $datetime => $activityListId) {
-            $html .= '<div xmlns="http://www.w3.org/1999/xhtml" class="whitebox">
-			<h2>' . $datetime . '</h2><ul class="journal">';
+
+            $cssClass = ($invertedCpt % 2 === 0)? 'timeline-inverted' :'';
             foreach ($activityListId as $activityId) {
-                $html .= '<li>
-					' . Sydney_Tools::getTime($listactivities['datas'][$activityId]->timestamp) . ': ';
+                $html .= '
+                <li class="'.$cssClass.'">
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4>'.$listactivities['datas'][$activityId]->fname . ' ' . $listactivities['datas'][$activityId]->lname.'
+                            </h4>
+                            <p>
+                                <small class="text-muted">
+                                    <i class="fa fa-clock-o"></i> '.
+                                    $datetime.' '.Sydney_Tools::getTime($listactivities['datas'][$activityId]->timestamp)
+                                .'</small>
+                            </p>
+                        </div>
+                        <div class="timeline-body"><p>';
 
-                switch ($listactivities['datas'][$activityId]->module . '-' . $listactivities['datas'][$activityId]->module_table . '-' . $listactivities['datas'][$activityId]->action) {
-                    case 'adminfiles-filfiles-insert':
-                    case 'adminfiles-filfiles-update':
-                        $html .= '<a href="/adminfiles/index/index/id/' . $listactivities['datas'][$activityId]->module_ids . '">'
-                            . $listactivities['datas'][$activityId]->cnt . ' ' . Sydney_Tools::_('trace.event.action.' . $listactivities['datas'][$activityId]->action) . '
-					 			</a>';
-                        break;
-                    case 'adminpages-pagstructure-restore':
-                    case 'adminpages-pagstructure-insert':
-                    case 'adminpages-pagstructure-update':
-                        $html .= '<a href="/' . $listactivities['datas'][$activityId]->module . '/index/edit/id/' . $listactivities['datas'][$activityId]->module_ids . '">'
-                            . $listactivities['datas'][$activityId]->cnt . ' ' . Sydney_Tools::_('trace.event.action.' . $listactivities['datas'][$activityId]->action) . '
-					 			</a>';
-                        break;
-                    case 'adminpages-pagdivs-insert':
-                    case 'adminpages-pagdivs-update':
-                        $html .= '<a href="/' . $listactivities['datas'][$activityId]->module . '/pages/edit/id/' . $listactivities['datas'][$activityId]->parent_id . '">'
-                            . $listactivities['datas'][$activityId]->cnt . ' ' . Sydney_Tools::_('trace.event.action.' . $listactivities['datas'][$activityId]->action) . '
-					 			</a>';
-                        break;
-                    case 'adminnews-nwsnews-insert':
-                    case 'adminnews-nwsnews-update':
-                        $html .= '<a href="/' . $listactivities['datas'][$activityId]->module . '/index/properties/id/' . $listactivities['datas'][$activityId]->module_ids . '">'
-                            . $listactivities['datas'][$activityId]->cnt . ' ' . Sydney_Tools::_('trace.event.action.' . $listactivities['datas'][$activityId]->action) . '
-					 			</a>';
-                        break;
-                    case 'adminnews-pagdivs-insert':
-                    case 'adminnews-pagdivs-update':
-                        $html .= '<a href="/adminpages/pages/edit/id/' . $listactivities['datas'][$activityId]->parent_id . '/emodule/news">'
-                            . $listactivities['datas'][$activityId]->cnt . ' ' . Sydney_Tools::_('trace.event.action.' . $listactivities['datas'][$activityId]->action) . '
-					 			</a>';
-                        break;
-                    default:
-                        $html .= $listactivities['datas'][$activityId]->cnt . ' ' . Sydney_Tools::_('trace.event.action.' . $listactivities['datas'][$activityId]->action);
-                        break;
-                }
+                $html .= '
+'.$listactivities['datas'][$activityId]->cnt . ' ' . Sydney_Tools::_('trace.event.action.' . $listactivities['datas'][$activityId]->action);
 
-                $html .= ' <strong>by</strong> ' . $listactivities['datas'][$activityId]->fname . ' ' . $listactivities['datas'][$activityId]->lname . '.
-				</li>';
+                $html .= '</p></div></div><div class="timeline-badge primary">
+<i class="fa fa-check"></i></div></li>';
+
+                //$currentModuleNameFormated = $listactivities['datas'][$activityId]->module . '-' . $listactivities['datas'][$activityId]->module_table . '-' . $listactivities['datas'][$activityId]->action;
+
+                // MAEL NOTE : a garder pour le futur switch case  echo $currentModuleNameFormated . ' ';
+
             }
-
-            $html .= '</ul></div>';
+            $invertedCpt++;
         }
 
         return $html;

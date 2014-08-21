@@ -1,8 +1,32 @@
-<div id="dashboardListActivities">
-    <?php
-    // display list of activities
-    if (array_key_exists('time', $this->activities)) {
-        echo $this->Dashboard($this->activities);
-    }
-    ?>
+<div class="col-lg-10">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><?= Sydney_Tools_Localization::_('Display activity of') ?></label>
+                    <div class="col-sm-9">
+                        <select class="form-control" id="selectDashboardListActivities">
+                            <option><?= Sydney_Tools_Localization::_('Everybody') ?></option>
+                            <option>--------</option>
+                            <?php
+                            foreach ($this->activities['user'] as $user => $activityListId) {
+                                echo '<option value="' . $this->activities['datas'][$activityListId]->users_id . '">' . $user . '</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="dashboardListActivities" class="panel-body">
+            <ul class="timeline">
+                <?php
+                // display list of activities
+                if (array_key_exists('time', $this->activities)) {
+                    echo $this->Dashboard($this->activities);
+                }
+                ?>
+            </ul>
+        </div>
+    </div>
 </div>
