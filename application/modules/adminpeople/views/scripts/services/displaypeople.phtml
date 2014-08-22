@@ -141,10 +141,10 @@ $capsules = array(
                 <div class="panel-footer">
                     <a class="btn btn-primary vdetailb"
                        href="/adminpeople/index/profile/id/<?php echo $p['id']; ?>"><i class="fa fa-info fa-fw"></i> View details</a>
-                    <a class="btn btn-success peodeleteb"
+                    <a class="btn btn-success"
                        href="/adminpeople/index/editindex/id/<?php echo $p['id']; ?>"><i class="fa fa-edit fa-fw"></i> Edit</a>
                     <?php if ($this->users_id != $p['id']) { ?>
-                        <a class="btn btn-danger" href="/adminpeople/services/delete/id/<?php echo $p['id']; ?>/format/json"><i class="fa fa-trash-o fa-fw"></i>Delete</a>
+                        <a class="btn btn-danger peodeleteb" href="/adminpeople/services/delete/id/<?php echo $p['id']; ?>/format/json"><i class="fa fa-trash-o fa-fw"></i>Delete</a>
                     <?php } ?>
                 </div>
             </div>

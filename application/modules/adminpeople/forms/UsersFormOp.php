@@ -21,7 +21,6 @@ class UsersFormOp extends Sydney_Form
         $request = UsersFormOp::getParams('request');
         $postedDatas = UsersFormOp::getParams('data');
 
-        $this->setAttrib('accept-charset', 'UTF-8');
         $this->setName('users');
 
         $id = new Zend_Form_Element_Hidden('id');
@@ -29,6 +28,7 @@ class UsersFormOp extends Sydney_Form
         // Url forward in case of form success
         $urlForwards = new Zend_Form_Element_Hidden('urlforwards');
         $urlForwards->setValue('/adminpeople/index/index/');
+
 
         $module = new Zend_Form_Element_Hidden('module');
         $module->setValue($request->module);
@@ -67,6 +67,7 @@ class UsersFormOp extends Sydney_Form
         $fileName = new Zend_Form_Element_Text('fname');
         $fileName->setLabel('fname');
         $fileName->setRequired();
+        //$fileName->setDecorators(array('SimpleInputDecorator', 'SimpleLabelDecorator',));
 
         $mdName = new Zend_Form_Element_Text('mdname');
         $mdName->setLabel('mdname');
@@ -87,7 +88,6 @@ class UsersFormOp extends Sydney_Form
 
         $submit = new Zend_Form_Element_Submit('submit', 'Save user');
         $submit->setAttrib('id', 'submitbuttonuser');
-
         // Init list of elements
         $elementsList[0] = array(
             $id,
@@ -154,6 +154,7 @@ class UsersFormOp extends Sydney_Form
 
         $this->addElements($elementsList[0]);
         $this->addElements($elementsList[1]);
+        $this->addDecoratorToElements();
     }
 
 }

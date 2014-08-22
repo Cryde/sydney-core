@@ -18,14 +18,13 @@ class Sydney_Decorator_InputDecorator extends Zend_Form_Decorator_Abstract
             return $content;
         }
 
-        $output = '<dt id="' . $element->getName() . '-label">';
-        $output .= $this->buildLabel();
+
+        $output = $this->buildLabel();
         $output .= $this->buildDescription();
-        $output .= "</dt>";
 
         switch ($this->getPlacement()) {
             case (self::APPEND):
-                return $content . $this->getSeparator() . $output;
+                return $content. $this->getSeparator() . $output;
             case (self::PREPEND):
             default:
                 return $output . $this->getSeparator() . $content;

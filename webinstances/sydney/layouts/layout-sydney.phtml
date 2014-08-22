@@ -26,16 +26,22 @@ $settingsNms = new Zend_Session_Namespace('appSettings');
 		<?php echo $this->headLink(); ?>
 
         <!-- Bootstrap Core CSS -->
-        <link href="sydneyassets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<?= Sydney_Tools::getRootUrlCdn();?>/sydneyassets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="sydneyassets/vendor/sb-admin/css/sb-admin-2.css" rel="stylesheet">
+        <link href="<?= Sydney_Tools::getRootUrlCdn();?>/sydneyassets/vendor/sb-admin/css/sb-admin-2.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
-        <link href="sydneyassets/vendor/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="<?= Sydney_Tools::getRootUrlCdn();?>/sydneyassets/vendor/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
         <!-- Custom Dashboard Timeline -->
-        <link rel="stylesheet" href="sydneyassets/vendor/timeline/css/timeline.css">
+        <link rel="stylesheet" href="<?= Sydney_Tools::getRootUrlCdn();?>/sydneyassets/vendor/timeline/css/timeline.css">
+
+        <!-- jQuery UI CSS -->
+        <link rel="stylesheet" href="<?= Sydney_Tools::getRootUrlCdn();?>/sydneyassets/vendor/jquery/css/jquery-ui.min.css">
+
+        <!-- Plupload -->
+        <link rel="stylesheet" href="<?= Sydney_Tools::getRootUrlCdn();?>/sydneyassets/vendor/plupload/css/plupload.queue.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -155,19 +161,6 @@ $settingsNms = new Zend_Session_Namespace('appSettings');
             <!-- /.sidebar-collapse -->
         </div>
         </nav>
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -178,8 +171,6 @@ $settingsNms = new Zend_Session_Namespace('appSettings');
             </div>
             <!-- /.row -->
         </div>
-
-
     </div>
 
 
@@ -202,19 +193,23 @@ $settingsNms = new Zend_Session_Namespace('appSettings');
     </div>
 
     <!-- jQuery Version 1.11.0 -->
-    <script src="sydneyassets/vendor/jquery/js/jquery-1.11.0.js"></script>
+    <script src="<?= Sydney_Tools::getRootUrlCdn();?>/sydneyassets/vendor/jquery/js/jquery-1.11.0.js"></script>
 
     <!-- jQuery-ui -->
-    <script src="sydneyassets/vendor/jquery/js/jquery-ui.min.js"></script>
+    <script src="<?= Sydney_Tools::getRootUrlCdn();?>/sydneyassets/vendor/jquery/js/jquery-ui.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="sydneyassets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?= Sydney_Tools::getRootUrlCdn();?>/sydneyassets/vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="sydneyassets/vendor/metis-menu/js/metisMenu.min.js"></script>
+    <script src="<?= Sydney_Tools::getRootUrlCdn();?>/sydneyassets/vendor/metis-menu/js/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="sydneyassets/vendor/sb-admin/js/sb-admin-2.js"></script>
+    <script src="<?= Sydney_Tools::getRootUrlCdn();?>/sydneyassets/vendor/sb-admin/js/sb-admin-2.js"></script>
+
+    <!-- Plupload -->
+    <script src="<?= Sydney_Tools::getRootUrlCdn();?>/sydneyassets/vendor/plupload/js/plupload.full.min.js"></script>
+    <script src="<?= Sydney_Tools::getRootUrlCdn();?>/sydneyassets/vendor/plupload/js/jquery.plupload.queue.min.js"></script>
 
     <?php echo $this->headScript(); ?>
 </body>

@@ -136,15 +136,8 @@ class Adminpeople_IndexController extends Sydney_Controller_Action
             } // END - if user exist
         }
 
-        // Set a custom form user on publicms if exist for the current instance
-        $formclass = 'UsersFormOp';
-        if ($this->view->moduleName == 'publicms' && !empty(Sydney_Tools::getConf('general')->form->profile)
-            && @class_exists(Sydney_Tools::getConf('general')->form->profile)
-        ) {
-            $formclass = Sydney_Tools::getConf('general')->form->profile;
-        }
         Sydney_Form::setParams(array('request' => $this->r));
-        $this->view->usersForm = new $formclass(null, $this->usersData['member_of_groups'], $modeEdit);
+        $this->view->usersForm = new UsersFormOp(null, $this->usersData['member_of_groups'], $modeEdit);
 
         if (isset($this->view->id)) {
             $usera = $user->toArray();
@@ -152,6 +145,16 @@ class Adminpeople_IndexController extends Sydney_Controller_Action
         if ($modeEdit) {
             $this->view->usersForm->populate($usera);
         }
+
+        $this->view->scriptParamModule = $this->r->module;
+        $this->view->scriptParamController = $this->r->controller;
+        $this->view->scriptParamId= $this->id;
+        $this->view->scriptParamRootCdn = Sydney_Tools::getRootUrlCdn();
+        $this->view->scriptParamSource = $this->source;
+        $this->view->scriptParamPeopleId = $this->peopleid;
+        $this->view->scriptParamModule2 = $this->request->module;
+        $this->view->scriptParamMaxSize = Zend_Registry::get('config')->general->upload->maxsize;
+        $this->view->scriptParamRootCdn2 = Sydney_Tools_Paths::getRootUrlCdn();
     }
 
     /**
