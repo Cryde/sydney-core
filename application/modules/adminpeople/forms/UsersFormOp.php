@@ -67,7 +67,6 @@ class UsersFormOp extends Sydney_Form
         $fileName = new Zend_Form_Element_Text('fname');
         $fileName->setLabel('fname');
         $fileName->setRequired();
-        //$fileName->setDecorators(array('SimpleInputDecorator', 'SimpleLabelDecorator',));
 
         $mdName = new Zend_Form_Element_Text('mdname');
         $mdName->setLabel('mdname');

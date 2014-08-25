@@ -193,7 +193,7 @@ class Sydney_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
         $this->request->setModuleName('default');
         $this->request->setControllerName('login');
         $this->request->setActionName('index');
-        $this->request->setParams(array('errormessage' => 'Vous tentez d\'accéder une page protégée, veuillez vous connecter! <!-- ' . $code . ' -->'));
+        $this->request->setParams(array('errormessage' => 'Sydney connexion <!-- ' . $code . ' -->'));
     }
 
     /**

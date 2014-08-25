@@ -363,18 +363,10 @@ class LoginController extends Sydney_Controller_Actionpublic
         }
 
         $config = new Zend_Config_Ini(__DIR__ . '/../config/default.login.index.ini', 'loginform');
-        $form = new Sydney_Form($config);
+        $form = new Sydney_Form_Login($config);
         $form->setAction($action);
 
-        // Set decorator to checkbox element 'Remember Me'
-        $form->addPrefixPath('Sydney_Decorator', 'Sydney/Decorator/', 'decorator');
-        $form->addElementPrefixPath('Sydney_Decorator', 'Sydney/Decorator/', 'decorator');
-        $form->getElement('rememberme')->setDecorators(
-            array(
-                'CheckboxloginDecorator'
-            )
-        );
-        /**/
+        $form->addDecoratorToElements();
 
         // Check concurrent access
         // if params MaxLogin exist then check the number of session

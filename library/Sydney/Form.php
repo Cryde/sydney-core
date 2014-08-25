@@ -23,7 +23,6 @@ class Sydney_Form extends Zend_Form
         'ViewHelper',
         'Errors',
         array('Description', array('tag' => 'p', 'class' => 'description')),
-        //array('HtmlTag',     array('class' => 'col-sm-10')),
         array(array("innerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "col-sm-10")),
         array('Label',       array('class' => 'col-sm-2 control-label', 'requiredSuffix' => '*')),
         array(array("outerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "form-group")),
@@ -108,7 +107,7 @@ class Sydney_Form extends Zend_Form
         // set the decorator for the form itself, this wraps the <form> elements in a div tag instead of a dl tag
         $this->setDecorators(array(
             array('FormElements', array('tag' => 'div', 'class' => 'form-group')),
-            array('HtmlTag', array('tag' => 'div', 'class' => 'form-group')),
+            array('HtmlTag', array('tag' => 'div')),
             'Form'));
         $this->addAttribs(array('class' => 'form-horizontal'));
 
@@ -122,9 +121,9 @@ class Sydney_Form extends Zend_Form
 
     }
 
-    protected function addDecoratorToElements(){
-        foreach($this->getElements() as $element){
+    public function addDecoratorToElements(){
 
+        foreach($this->getElements() as $element){
             if($element instanceof Zend_Form_Element_Text
                 || $element instanceof Zend_Form_Element_Password
                 || $element instanceof Zend_Form_Element_Select
@@ -139,6 +138,7 @@ class Sydney_Form extends Zend_Form
             }
         }
     }
+
 
     /**
      * Setup the translation, this is not used for the moment
