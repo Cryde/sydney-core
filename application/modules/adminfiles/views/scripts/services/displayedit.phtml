@@ -11,11 +11,11 @@ $finfo = $ftype->getFileinfo();
         $("#fileProperties").fileproperties();
         // folders link
         function setLinkedToGUI(sel, eid, elabel) {
-            if (sel != null) {
-                $('#' + eid).val($.toJSON(sel));
+            if (sel && sel.length > 0) {
+                $('#' + eid).val(JSON.parse(sel));
             }
             else if ($('#' + eid).val() != '') {
-                sel = $.evalJSON($('#' + eid).val());
+                sel = JSON.parse($('#' + eid).val());
             }
             else {
                 sel = [];
@@ -32,7 +32,9 @@ $finfo = $ftype->getFileinfo();
         $('.agdbutlinkfolders').click(function (e) {
             e.preventDefault();
             var sel = [];
-            if ($('#nwsfolders').val() != '') sel = $.evalJSON($('#filfolders').val());
+            if ($('#nwsfolders').val() != '') {
+                sel = JSON.parse($('#filfolders').val());
+            }
             $('#folderreldiv').foldermanager({
                 'title': 'Categories',
                 'cortable': 'filfolders_filfiles',
@@ -47,7 +49,7 @@ $finfo = $ftype->getFileinfo();
         });
         var sel2 = [];
         if ($('#nwsfolders').val() != '') {
-            sel2 = $.evalJSON($('#filfolders').val());
+            sel2 = JSON.parse($('#filfolders').val());
         }
         setLinkedToGUI(sel2, 'filfolders', 'Categories');
         <?php if (strtolower($finfo['general.extension']) == 'pdf') {

@@ -9,7 +9,6 @@ $(function(){
             $("#filesBrowse").hide();
 
             $("#fileEdit").filemanager( {
-
                 'embeded': $('#script-embed').val(),
                 'context': $('#script-context').val(),
                 'filter': $('#script-filter').val(),

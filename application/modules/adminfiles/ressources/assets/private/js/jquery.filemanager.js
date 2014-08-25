@@ -318,6 +318,7 @@
                     'action': function(){
                         $('.bselect', fileArea ).removeClass('itemselected');
                         $('.file_selected').removeClass('file_selected');
+                        $('div.panel').removeClass('panel-info');
                     },
                     'separator':true
                  },
@@ -325,12 +326,14 @@
                     'label': 'Select all',
                     'action': function(){
                         $('.bselect', fileArea).addClass('itemselected').parents('li, tr').addClass('file_selected');
+                        $('div.panel').addClass('panel-info');
                     }
                  },
                  {
                     'label': 'Inverse selection',
                     'action': function(){
                         $('.bselect', fileArea).toggleClass('itemselected').parents('li, tr').toggleClass('file_selected');
+                        $('div.panel').toggleClass('panel-info');
                     }
                  }
 	         ]
@@ -348,10 +351,14 @@
 	{
 		event.preventDefault();
 		// JTO - 13/09/2013 - Ajout de la class "file_selected"
-		if( event.currentTarget.tagName == 'TR' )
-		    $('a.bselect', event.currentTarget).toggleClass('itemselected').parents('tr').toggleClass('file_selected');
-		else
-		    $(event.currentTarget).toggleClass('itemselected').parents('li').toggleClass('file_selected');
+
+		if( event.currentTarget.tagName == 'TR' ){
+            $('a.bselect', event.currentTarget).toggleClass('itemselected').parents('tr').toggleClass('file_selected');
+        }
+		else{
+            $(event.currentTarget).children('div.panel').toggleClass('panel-info');
+            $(event.currentTarget).toggleClass('itemselected');
+        }
 	};
 
 	/**

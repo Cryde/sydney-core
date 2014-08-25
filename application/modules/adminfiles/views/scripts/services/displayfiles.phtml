@@ -25,20 +25,21 @@ if (isset($this->nbpages)) {
             foreach ($files as $f) {
                 if ($f['filetype'] == 'file') {
                     ?>
-                    <div class="col-lg-2" fileprops="<?php echo addslashes($f['filename'] . '<br>Created: ' . $f['date'] . '<br>' . $f['info']); ?>">
-                        <div class="panel panel-info">
+                    <a class="bselect typefile col-lg-2" fileprops="<?php echo addslashes($f['filename'] . '<br>Created: ' . $f['date'] . '<br>' . $f['info']); ?>">
+                        <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <a href="<?php echo $f['id']; ?>" class="bselect typefile">
+                                <?php echo $f['name']; ?><br/>
+                                <?php echo $f['info']; ?>
+                                <div href="<?php echo $f['id']; ?>" >
             <!--                A remettre absolument !!!                                               -->
 <!--                            <img alt="" src="--><?php //echo $this->cdn; ?><!--/sydneyassets/images/tagged---><?php //echo $f['istagged']; ?><!--.png"/>-->
                                 <img src="<?php echo $this->cdn; ?>/<?php echo $f['url']; ?>" class="img-thumbnail center-block" alt="Responsive image">
-                                <?php echo $f['name']; ?><br/>
-                                <?php echo $f['info']; ?>
+
                             </div>
 
-                            </a>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 <?php } else if ($f['filetype'] == 'folder' || $f['filetype'] == 'folderback') { ?>
                     <li>
                         <a href="<?php echo $f['id']; ?>"
