@@ -3305,12 +3305,6 @@ table.ui-table tbody tr.file_selected:hover td{
 	margin-left: 25px;
 }
 
-#subbutselected {
-	position: absolute;
-	z-index: 100;
-	left: 315px;
-}
-
 .newsorder ol {
 	list-style-type: decimal;
 	list-style-position: inside;

@@ -30,6 +30,8 @@ class Adminfiles_IndexController extends Sydney_Controller_Action
         $id = (int) $r->id;
 
         if (isset($r->embed) && $r->embed == 'yes') {
+            $id = 0;
+
             if (isset($r->context)) {
                 $context = $r->context;
             } else {
@@ -45,7 +47,6 @@ class Adminfiles_IndexController extends Sydney_Controller_Action
             } else {
                 $mode = 'thumb';
             }
-            $id = 0;
 
             if (substr($context, 0, 8) == 'ckeditor') {
 
@@ -73,29 +74,18 @@ class Adminfiles_IndexController extends Sydney_Controller_Action
             $mode = 'thumb';
         }
 
+        $this->view->scriptParamEmbed = $r->embed;
+        $this->view->scriptParamContext = $context;
+        $this->view->scriptParamFilter = $filter;
+        $this->view->scriptParamMode = $mode;
+        $this->view->scriptParamId = $id;
+        $this->view->scriptParamQuery = '';
+
         //if (!$this->view->ckeditor_context) {
 
         if ($id > 0) {
             $this->setSubtitle('File view');
             $this->setSideBar('edit', 'files');
-            /**
-             * load file details
-             */
-            $this->view->addiScript = '<script>
-						var oPaginator;
-						$(function() {
-							if ($("#fileEdit").length > 0) {
-								$("#filesBrowse").hide();
-								oPaginator = $("#fileEdit").filemanager( {
-                                                                    \'embeded\' : \'' . $r->embed . '\',
-                                                                    \'context\' : \'' . $context . '\',
-                                                                    \'filter\' : \'' . $filter . '\',
-                                                                    \'mode\' : \'' . $mode . '\',
-                                                                    \'id\' : \'' . $id . '\'
-								});
-							}
-						});
-				</script>';
             // END - paginator*/
         } else {
             $this->setSubtitle('Thumbnail view');
@@ -107,21 +97,7 @@ class Adminfiles_IndexController extends Sydney_Controller_Action
             if (isset($r->q) && $r->q) {
                 $q = addslashes($r->q);
             }
-            $this->view->addiScript = '<script>
-						var oPaginator;
-						$(function() {
-							if($("#filelisting").length > 0) oPaginator = $("#filelisting").filemanager( {
-							\'embeded\' : \'' . $r->embed . '\',
-							\'context\' : \'' . $context . '\',
-							\'filter\' : \'' . $filter . '\',
-							\'mode\' : \'' . $mode . '\',
-							\'id\' : \'' . $id . '\',
-							\'q\' : \'' . $q . '\',
-						});
-						$(".edefiles").css("background","#DDD");
-						$(".contentEditor > li.editing").css("padding-top","5px");
-					});
-				</script>';
+            $this->view->scriptParamQuery= $q;
             // END - paginator*/
         }
         //}

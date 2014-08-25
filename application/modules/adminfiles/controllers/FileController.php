@@ -73,7 +73,6 @@ class Adminfiles_FileController extends Sydney_Controller_Action
                 $fileType = $file->type;
                 $fullpath = Sydney_Tools_Paths::getAppdataPath() . '/adminfiles/' . $fileType . '/' . $file->filename;
                 $fileTypeInstance = Sydney_Medias_Filetypesfactory::createfiletype($fullpath);
-
                 // defines the thumb size
                 if ($typeSize == 2) {
                     $fileTypeInstance->thumbSize = array(64, 64);

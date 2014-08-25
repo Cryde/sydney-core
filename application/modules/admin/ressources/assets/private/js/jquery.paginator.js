@@ -177,7 +177,6 @@
 	function onClickBtn(event)
 	{
 		event.preventDefault();
-		$('#subbutselected').hide();
 		var tid = event.currentTarget.id;
 		if (tid == 'thumbviewb') resultviewAction( {'mode': 'thumb', 'count':opts.resultcount } );
 		if(tid == 'listviewb') resultviewAction( {'mode': 'list', 'count':opts.listcount} );

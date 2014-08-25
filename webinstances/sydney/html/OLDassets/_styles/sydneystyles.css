@@ -154,7 +154,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
 
 /*
-JTO - Ajout du vrai clearfix vu que le clearfix ci dessus a été modifié ....
+JTO - Ajout du vrai clearfix vu que le clearfix ci dessus a ï¿½tï¿½ modifiï¿½ ....
 */
 .clearfix2:after {
 	content: ".";
@@ -3487,12 +3487,6 @@ table.ui-table tbody tr.file_selected:hover td{
 
 #butselection {
 	margin-left: 25px;
-}
-
-#subbutselected {
-	position: absolute;
-	z-index: 100;
-	left: 315px;
 }
 
 .newsorder ol {
