@@ -41,25 +41,25 @@ if (isset($this->nbpages)) {
                         </div>
                     </a>
                 <?php } else if ($f['filetype'] == 'folder' || $f['filetype'] == 'folderback') { ?>
-                    <li>
-                        <a href="<?php echo $f['id']; ?>"
-                           class="bselect typefolder"
-                           style="text-decoration:none;">
-                            <div class="icon"
-                                 style="background-image: url(<?php echo $this->cdn; ?>/sydneyassets/images/icons/<?php if ($f['filetype'] == 'folderback') {
-                                     echo 'folder_blue_back.png';
-                                 } else {
-                                     echo 'folder_blue.png';
-                                 } ?>);">
-                                <img alt=""
-                                     src="<?php echo $this->cdn; ?>/sydneyassets/images/tagged-<?php echo $f['istagged']; ?>.png"/>
+
+                    <a href="<?php echo $f['id']; ?>" class="bselect typefolder col-lg-2" style="text-decoration:none;">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="icon" style="background-image: url(<?php echo $this->cdn; ?>/adminfiles/ressources/assets/private/img/<?php if ($f['filetype'] == 'folderback') {
+                                         echo 'folder_blue_back.png';
+                                     } else {
+                                         echo 'folder_blue.png';
+                                     } ?>);">
+<!--                                    <img alt="" src="--><?php //echo $this->cdn; ?><!--/sydneyassets/images/tagged---><?php //echo $f['istagged']; ?><!--.png"/>-->
+                                    <img alt="" src="<?php echo $this->cdn; ?>/sydneyassets/images/tagged-<?php echo $f['istagged']; ?>.png"/>
+                                </div>
+                                <strong class="fileName"
+                                        style="text-decoration:none;color:#555;font-weight:normal;font-size:.8em;"><?php echo $f['name']; ?></strong><br/>
+                                <span class="uploadInfos"
+                                      style="text-decoration:none;color:#555;font-weight:normal;font-size:.8em;"><?php echo $f['info']; ?></span>
                             </div>
-                            <strong class="fileName"
-                                    style="text-decoration:none;color:#555;font-weight:normal;font-size:.8em;"><?php echo $f['name']; ?></strong><br/>
-                            <span class="uploadInfos"
-                                  style="text-decoration:none;color:#555;font-weight:normal;font-size:.8em;"><?php echo $f['info']; ?></span>
-                        </a>
-                    </li>
+                        </div>
+                    </a>
                 <?php
                 }
             }
