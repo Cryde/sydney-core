@@ -15,31 +15,6 @@ else if ($this->node) {
     $this->parentid = $n->parent_id;
 }
 ?>
-<?php echo $this->helpBox('/adminhelp/index/index/section/pageprops'); ?>
-<script>
-    $(function () {
-        $('.uptimfield').click(function (e) {
-            e.preventDefault();
-            $('#cachetime').val($(this).attr('href'));
-        });
-
-        $('#layout').change(function () {
-            var valSelect = $(this).val();
-            $.ajax({
-                url: '/adminpages/services/getpreviewlayout/',
-                data: {layoutname: valSelect},
-                success: function (data) {
-                    if (data != null) {
-                        $('.previewLayout').html(data);
-                    }
-                }
-            });
-        });
-        $('#layout').change();
-    });
-
-</script>
-
 
 <form action="/adminpages/index/editadvancedprocess" method="post"
       class="styled-form">
@@ -183,9 +158,12 @@ else if ($this->node) {
             array('6 months', 60 * 60 * 24 * 30 * 6),
             array('1 year', 60 * 60 * 24 * 365),
         );
+
+        echo '<div class="btn-group">';
         foreach ($dt as $el) {
-            echo '<a href="' . $el[1] . '" class="uptimfield">' . $el[0] . '</a>&nbsp;&nbsp; ';
+            echo '<button class="btn btn-sm btn-default uptimfield" href="' . $el[1] . '">' . $el[0] . '</a>&nbsp;&nbsp; ';
         }
+        echo '</div>';
 
         ?>
 		</span>
@@ -208,10 +186,9 @@ else if ($this->node) {
 
 
     <div class="buttonsbox">
-        <input type="submit" name="createPage"
-               value="<?= Sydney_Tools_Localization::_('Save advanced properties') ?>"/>
-        <?= Sydney_Tools_Localization::_('or') ?> <a
-            href="/adminpages"><?= Sydney_Tools_Localization::_('Cancel') ?></a>
+        <input type="submit" name="createPage" class="btn btn-lg btn-primary"
+               value="<?= Sydney_Tools_Localization::_('Save') ?>"/>
+        <a class="btn btn-lg btn-default" href="/adminpages"><?= Sydney_Tools_Localization::_('Cancel') ?></a>
     </div>
 
 </form>

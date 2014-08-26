@@ -23,40 +23,41 @@ class Adminpages_View_Helper_EditorActions extends Zend_View_Helper_Abstract
         if (!$isEditable) {
             return '<div class="actions"><div class="notEditable">' . $msgNotEditable . '</div></div>';
         }
-        $toReturn = '<div class="actions"><label>-</label><label class="labelEditAction" id="labelEditAction-' . $params['dbid'] . '">' . $params['label'] . '</label>';
+        $toReturn = '<div class="actions pull-right"><label class="text-muted labelEditAction" id="labelEditAction-' . $params['dbid'] . '">' . $params['label'] . '</label>';
 
-        $toReturn .= '<a id="duplicatediv-' . $params['dbid'] . '" class="button publishdiv sydney_editor_a" href="#">Duplicate</a>';
+        $toReturn .= '<a id="duplicatediv-' . $params['dbid'] . '" class="btn btn-sm btn-warning sydney_editor_a" href="#">Duplicate</a> ';
 
         if ($accessRightsEnabled) {
-            $toReturn .= '<a class="button orange sydney_editor_a" href="accessrightsstatus">Access Rights</a>';
+            $toReturn .= '<a class="btn btn-sm btn-default sydney_editor_a" href="accessrightsstatus">Access Rights</a> ';
         }
 
         if (!(false == $isDeletable && false == $isDraft)) {
             if ($isDraft) {
-                $toReturn .= '<a class="button publishdiv sydney_editor_a" href="publishdiv">Save as actual content</a>';
+                $toReturn .= '<a class="btn btn-sm btn-success sydney_editor_a" href="publishdiv">Save as actual content</a> ';
             } else {
-                $toReturn .= '<a class="button unpublishdiv sydney_editor_a" href="unpublishdiv">Save as draft</a>';
+                $toReturn .= '<a class="btn btn-sm btn-default sydney_editor_a" href="unpublishdiv">Save as draft</a> ';
             }
             if (!$isDeletable) {
-                $toReturn .= '<a class="button warning sydney_editor_a" href="rollback">Delete draft</a>';
+                $toReturn .= '<a class="btn btn-sm btn-danger sydney_editor_a" href="rollback">Delete draft</a> ';
             } else {
                 if (!$isShared) {
-                    $toReturn .= '<a class="button warning sydney_editor_a" href="delete">Delete</a>';
+                    $toReturn .= '<a class="btn btn-sm btn-danger sydney_editor_a" href="delete">Delete</a> ';
                 }
             }
         }
-        $toReturn .= '<a class="button sydney_editor_a" href="edit">Edit</a>';
+        $toReturn .= '<a class="btn btn-sm btn-primary sydney_editor_a" href="edit">Edit</a> ';
         if ($workflowEnabled) {
-            $toReturn .= '<a class="button orange sydney_editor_a" href="workflowstatus">Change status</a>';
+            $toReturn .= '<a class="btn btn-sm btn-default sydney_editor_a" href="workflowstatus">Change status</a> ';
         }
 
         if (!$isDraft) {
             if ($isOnline) {
-                $toReturn .= '<a id="offlinediv-' . $params['dbid'] . '" class="button unpublishdiv sydney_editor_a" href="#">Unpublish</a>';
+                $toReturn .= '<a id="offlinediv-' . $params['dbid'] . '" class="btn btn-sm btn-danger sydney_editor_a" href="#">Unpublish</a>';
             } else {
-                $toReturn .= '<a id="offlinediv-' . $params['dbid'] . '" class="button publishdiv sydney_editor_a" href="#">Publish</a>';
+                $toReturn .= '<a id="offlinediv-' . $params['dbid'] . '" class="btn btn-sm btn-success sydney_editor_a" href="#">Publish</a>';
             }
         }
+
         $toReturn .= '</div>
 					<div class="move"><a class="button sydney_editor_a" title="Move" href="#">
 					<span class="sydney_editor_span">Move</span></a>

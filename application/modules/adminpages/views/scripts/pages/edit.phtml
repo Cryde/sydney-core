@@ -7,25 +7,7 @@
 $isDeveloper = $this->isDeveloper;
 $pagstructure_id = $this->pagstructure_id;
 ?>
-<?php echo $this->helpBox('/adminhelp/index/index/section/pageedit'); ?>
-<script>
 
-    var pagstructureid = <?php echo $this->pagid; ?>;
-    var emodule = "<?php echo $this->emodule; ?>";
-
-    $(document).ready(function () {
-        $(this).Antidot_Contenttabs();
-    });
-</script>
-<style>
-    .accessRightsFilteredDiv {
-        border: 2px solid orange;
-    }
-
-    .isShared {
-        border: 2px solid #008800;
-    }
-</style>
 <div id="sharedialog"></div>
 <div id="savebutton">
     <input class="button bigwbutton" type="button" value="Save order"/>
@@ -43,10 +25,10 @@ $pagstructure_id = $this->pagstructure_id;
         <span class="ghost sydney_editor_span"></span>
         <a class="sydney_editor_a" href="#" onclick="return false;">Add here</a>
     </div>
-    <li class="blankitem sydney_editor_li">
+    <div class="blankitem sydney_editor_li">
         <?php echo $this->EditorActions(); ?>
         <div class="content"></div>
-    </li>
+    </div>
     <?php
     // print the result of the helpers
     foreach($this->customHelpers as $identifier => $customHelper){
@@ -160,9 +142,16 @@ $pagstructure_id = $this->pagstructure_id;
             );
         }
         ?>
-        <p class="addContentStatic">
-            <?php echo $this->EditorAddContentBar(); ?>
-        </p>
+        <div class="panel panel-info addContentStatic">
+            <div class="panel-heading">
+                <?php echo $this->editorAddContentBar(); ?>
+            </div>
+        </div>
     </ul>
 
 </div>
+
+
+
+<input type="hidden" value="<?php echo $this->pagid; ?>" id="script-pageId" />
+<input type="hidden" value="<?php echo $this->emodule; ?>" id="script-eModule" />

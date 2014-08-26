@@ -34,7 +34,7 @@ class Adminpages_View_Helper_ContentHeading extends Zend_View_Helper_Abstract
 			<h' . $params['level'] . ' class="sydney_editor_h' . $params['level'] . '">' . $content . '</h' . $params['level'] . '>
 		</div>
 		<p class="lastUpdatedContent sydney_editor_p">' . $eventsInfo['firstEvent'] . '<br />' . $eventsInfo['lastEvent'] . '</p>
-		</li>';
+		</div>';
 
         return $toReturn;
     }

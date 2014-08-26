@@ -14,7 +14,7 @@ class Adminpages_View_Helper_EditorAddContentBar extends Zend_View_Helper_Abstra
      * Helper main function
      * @return String HTML to be inserted in the view
      */
-    public function EditorAddContentBar()
+    public function editorAddContentBar()
     {
         $toReturn = '<strong>Add content:</strong> ';
         $htmlContentTab = array();

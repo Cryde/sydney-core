@@ -1,0 +1,10 @@
+.tree tr .adminpages_action_container{
+    visibility:hidden;
+    text-align:right;
+}
+.tree tr:hover .adminpages_action_container{
+    visibility: visible;
+}
+.tree tr:hover{
+    background-color: #F0F5FA;
+}

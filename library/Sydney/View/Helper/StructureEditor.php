@@ -57,8 +57,7 @@ class Sydney_View_Helper_StructureEditor extends Zend_View_Helper_Abstract
         $grpDB = new Usersgroups();
         $this->groups = $grpDB->fetchLabelstoFlatArray();
         $this->addNodes($structureArray);
-
-        return $this->toReturn;
+        return '<table class="table tree table-condensed">'.$this->toReturn.'</table>';
     }
 
     /**
@@ -70,18 +69,17 @@ class Sydney_View_Helper_StructureEditor extends Zend_View_Helper_Abstract
      */
     private function addNodes($nodes = array(), $sub = false, $parentDbId = 0, $firstCall = true)
     {
-        if (!$sub) {
-            $this->toReturn .= $this->getTabs() . '<ul id="sitemap" class="tree ui-sortable" dbid="' . $parentDbId . '">';
-        } else {
-            $this->toReturn .= $this->getTabs() . '<ul class="" dbid="' . $parentDbId . '">';
-        }
-
         foreach ($nodes as $node) {
 
+
+            if (!$sub) {
+                $this->toReturn .= $this->getTabs() . '<tr class="ui-sortable treegrid-'.$node['id'].'" id="sitemap" dbid="' . $parentDbId . '">';
+            } else {
+                $this->toReturn .= $this->getTabs() . '<tr dbid="' . $parentDbId . '" class="treegrid-'.$node['id'].' treegrid-parent-'.$parentDbId.'">';
+            }
+            $pagorder = 0;
             if (isset($node['pagorder'])) {
                 $pagorder = $node['pagorder'];
-            } else {
-                $pagorder = 0;
             }
 
             if ($node['status'] == 'restored') {
@@ -93,33 +91,41 @@ class Sydney_View_Helper_StructureEditor extends Zend_View_Helper_Abstract
                 $alertContentDraft = ' , Draft: ' . $this->listDraftContentByPage[$node['id']];
             }
             $this->toReturn .=
-                '<li class="test ' . $liAddClass . ' ' . ($node['ishome'] == 1 ? 'selected' : '') . '" id="' . $node['id'] . '" data="{addClass: \'' . $node['status'] . ' permspicto ' . $this->groups[($node['usersgroups_id'])] . '\',url: \'/adminpages/pages/edit/id/' . $node['id'] . '\',
-                noLink:' . ($this->isRedirected($node) ? 'true' : 'false') . '}" id="structure_' . $node['id'] . '" dbid="' . $node['id'] . '" dborder="' . $pagorder . '">'
-                . $node['label'] .
-                ' <div class="dynatree-title-detail">(Status: ' . $node['status'] .
+                '<td
+                    class="treegrid-'. $pagorder. ' ' . ($node['ishome'] == 1 ? 'selected' : '') . '"
+                    id="' . $node['id'] . '"
+                    data="{addClass: \'' . $node['status'] . ' permspicto ' . $this->groups[($node['usersgroups_id'])] . '\',url: \'/adminpages/pages/edit/id/' . $node['id'] . '\',noLink:' . ($this->isRedirected($node) ? 'true' : 'false') . '}"
+                    id="structure_' . $node['id'] . '"
+                    dbid="' . $node['id'] . '"
+                    dborder="' . $pagorder . '">
+
+                        <a href="/adminpages/pages/edit/id/' . $node['id'] . '">'
+                            . $node['label'] .
+                        '</a>
+
+                    </td>
+                    <td class="dynatree-title-detail"><h6 class="text-muted">(Status: ' . $node['status'] .
                 ' , View: ' . (int) $node['stats']['views'] . $alertContentDraft;
 
             $this->toReturn .= ')' . $this->getDataNodeAsHtml($node) . $this->getIshomepageHtml($node['ishome']) . $this->getIsRedirected($node);
-            $this->toReturn .= '</div>';
+            $this->toReturn .= '</h6> </td>';
 
             // prefix the structure content by action
-            $this->strAction .= $this->getActionsHtml($node['id'], $node['ishome'], $node['status'], $node);
-
-            if (count($node['kids']) > 0) {
-                $this->toReturn .= $this->addNodes($node['kids'], true, $node['id'], false);
-            }
+            $strAction = $this->getActionsHtml($node['id'], $node['ishome'], $node['status'], $node);
+            $this->toReturn .= '<td>'.$strAction.'</td>';
 
             if (!$sub && $this->hasNodeRestored && $node['status'] != 'restored') {
                 $this->hasNodeRestored = false;
             }
+            $this->toReturn .= '</td>';
+
+            if (count($node['kids']) > 0) {
+                $this->addNodes($node['kids'], true, $node['id'], false);
+            }
+
+            $this->toReturn .= '</tr>';
 
         } // END Foreach
-
-        $this->toReturn .= '</ul>';
-
-        if ($firstCall) {
-            $this->toReturn .= $this->strAction;
-        }
     }
 
     /**
@@ -245,27 +251,31 @@ class Sydney_View_Helper_StructureEditor extends Zend_View_Helper_Abstract
      */
     private function getActionsHtml($dbid = 0, $ishome = 0, $status = 'draft', $node = '')
     {
+        $btnColor = ($status === 'published') ? 'danger' : 'success';
+
         $hidit = ($ishome == 1) ? ' invisible' : '';
         $btnStatus = ($status != 'published') ? 'publish' : 'unpublish';
-        $toret = '<div id="adminpageaction-' . $dbid . '" style="display:none; text-align:right;" class="adminpages_action_container">';
-
+        $toret = '<div id="adminpageaction-' . $dbid . '" class="adminpages_action_container">';
         $toret .= '
         <div class="actionsContainer">
             <span class="actions">
-                <a class="button ' . $btnStatus . '" id="btn_publish_' . $dbid . '" dbid="' . $dbid . '">
+                <a class="button btn btn-sm btn-'.$btnColor.' '. $btnStatus . ' btn-outline" id="btn_publish_' . $dbid . '" dbid="' . $dbid . '">
                     ' . ucfirst($btnStatus) . '
                 </a>
-                <a class="button" href="/adminpages/index/create/parentid/' . $dbid . '">
-                    <img src="' . Sydney_Tools::getRootUrlCdn() . '/sydneyassets/images/ui/button/icon_add.png"/> Add a sub-page
+                <a title="Add a sub-page" class="button btn btn-sm btn-default btn-outline" href="/adminpages/index/create/parentid/' . $dbid . '">
+                    <i class="fa fa-level-down fa-fw"></i>
                 </a>
-                <a class="button" href="/adminpages/index/editproperties/id/' . $dbid . '">
-                    Properties
+                <a title="Properties" class="button btn btn-sm btn-info btn-outline" href="/adminpages/index/editproperties/id/' . $dbid . '">
+                    <i class="fa fa-cogs fa-fw"></i>
                 </a>
-                <a class="button duplicate" dbid="' . $dbid . '" href="#">
-                    Duplicate
+                <a title="Edit" class="button btn btn-sm btn-primary btn-outline" href="/adminpages/pages/edit/id/' . $node['id'] . '">
+                    <i class="fa fa-edit fa-fw"></i>
                 </a>
-                <a class="button warning' . $hidit . ' deletenodea" dbid="' . $dbid . '" href="#">
-                    Delete
+                <a title="Duplicate" class="button duplicate btn btn-sm btn-warning btn-outline" dbid="' . $dbid . '" href="#">
+                    <i class="fa fa-copy fa-fw"></i>
+                </a>
+                <a title="Delete" class="button warning  btn btn-sm btn-danger ' . $hidit . ' deletenodea btn-outline" dbid="' . $dbid . '" href="#">
+                    <i class="fa fa-times fa-fw"></i>
                 </a>
             </span>
 	    </div>';

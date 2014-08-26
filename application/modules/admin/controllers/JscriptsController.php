@@ -54,7 +54,12 @@ class Admin_JscriptsController extends Sydney_Controller_Action
         $backendOptions = array('cache_dir' => Sydney_Tools::getCachePath());
         $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
         if (true || !$result = $cache->load($fomnameCache)) {
-            $result = $this->_concatScripts();
+            if($this->currentType === 'js') {
+                $result = Sydney_Tools_Minify::concatScripts();
+            } else {
+                $result = Sydney_Tools_Minify::concatCss();
+            }
+
             $cache->save($result, $fomnameCache);
         }
         $this->view->script = $result;
@@ -69,12 +74,4 @@ class Admin_JscriptsController extends Sydney_Controller_Action
         // check view
     }
 
-    /**
-     * Concatenates the JS files
-     * @return string The js concatenated
-     */
-    private function _concatScripts()
-    {
-        return Sydney_Tools_Minify::concatScripts($this->currentType, $this->view, true);
-    }
 }

@@ -32,10 +32,10 @@ if ($this->inlineEditionAllowed) {
             <a class="sydney_editor_a" href="#" onclick="return false;">Add
                 here</a>
         </div>
-        <li class="blankitem sydney_editor_li">
+        <div class="blankitem sydney_editor_li">
             <?php echo $this->EditorActions(); ?>
             <div class="content"></div>
-        </li>
+        </div>
         <?php
 
         ?>
@@ -152,7 +152,7 @@ if ($this->inlineEditionAllowed) : ?>
         ?>
         <?php if ($this->inlineEditionAllowed) : ?>
             <p class="addContentStatic">
-                <?php echo $this->EditorAddContentBar(); ?>
+                <?php echo $this->editorAddContentBar(); ?>
             </p>
         <?php endif; ?>
 
