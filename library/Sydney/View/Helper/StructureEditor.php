@@ -49,7 +49,7 @@ class Sydney_View_Helper_StructureEditor extends Zend_View_Helper_Abstract
      * @return String HTML to be inserted in the view
      * @param Array $structureArray [optional] Structure in an array form
      */
-    public function StructureEditor($structureArray = array())
+    public function structureEditor($structureArray = array())
     {
         $oPageDivs = new Pagdivspage();
         $this->listDraftContentByPage = $oPageDivs->getDivsDraft();
@@ -63,8 +63,10 @@ class Sydney_View_Helper_StructureEditor extends Zend_View_Helper_Abstract
 
     /**
      * Add an array of nodes
-     * @return void
-     * @param Array $nodes [optional]
+     * @param array $nodes
+     * @param bool $sub
+     * @param int $parentDbId
+     * @param bool $firstCall
      */
     private function addNodes($nodes = array(), $sub = false, $parentDbId = 0, $firstCall = true)
     {
