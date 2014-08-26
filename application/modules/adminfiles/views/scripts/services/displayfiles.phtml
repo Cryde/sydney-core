@@ -43,19 +43,17 @@ if (isset($this->nbpages)) {
                 <?php } else if ($f['filetype'] == 'folder' || $f['filetype'] == 'folderback') { ?>
 
                     <a href="<?php echo $f['id']; ?>" class="bselect typefolder col-lg-2" style="text-decoration:none;">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                <strong><?php echo $f['name']; ?></strong>
-                                <?php echo $f['info']; ?>
+                        <div class="panel-heading">
+                            <strong><?php echo $f['name']; ?></strong>
+                            <?php echo $f['info']; ?>
 
-                                <img class="img-thumbnail center-block" alt="Responsive image" src="<?php echo $this->cdn; ?>/sydneyassets/img/adminfiles/<?php if ($f['filetype'] == 'folderback') {
-                                         echo 'folder_blue_back.png';
-                                     } else {
-                                         echo 'folder_blue.png';
-                                     } ?>"/>
+                            <img class="img-thumbnail center-block" alt="Responsive image" src="<?php echo $this->cdn; ?>/sydneyassets/img/adminfiles/<?php if ($f['filetype'] == 'folderback') {
+                                     echo 'folder_blue_back.png';
+                                 } else {
+                                     echo 'folder_blue.png';
+                                 } ?>"/>
 <!--                                    <img alt="" src="--><?php //echo $this->cdn; ?><!--/sydneyassets/images/tagged---><?php //echo $f['istagged']; ?><!--.png"/>-->
 <!--                                    <img alt="" src="--><?php //echo $this->cdn; ?><!--/sydneyassets/images/tagged---><?php //echo $f['istagged']; ?><!--.png"/>-->
-                            </div>
                         </div>
                     </a>
                 <?php
