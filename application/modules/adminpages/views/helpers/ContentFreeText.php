@@ -37,13 +37,13 @@ class Adminpages_View_Helper_ContentFreeText extends Zend_View_Helper_Abstract
 						dbid="' . $dbId . '"
 						dborder="' . $order . '"
 						pagstructureid="' . $pagstructureId . '"
-						sharedinids="' . $sharedInIds . '">
+						sharedinids="' . $sharedInIds . '"
+						data-content="' . $eventsInfo['firstEvent'] . '<br />' . $eventsInfo['lastEvent'] . '">
 			' . $actionsHtml . '
 			<div class="content">
 				' . $contentToDisplay . '
 			</div>
 			<textarea id="textAreaFreeText" style="display:none;">' . $secureContent . '</textarea>
-			<p class="lastUpdatedContent sydney_editor_p">' . $eventsInfo['firstEvent'] . '<br />' . $eventsInfo['lastEvent'] . '</p>
 		</li>';
 
         return $toReturn;

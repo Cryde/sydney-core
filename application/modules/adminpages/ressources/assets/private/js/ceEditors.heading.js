@@ -21,7 +21,7 @@ ceEditors['heading-block'] = {
 		if(level){
 			var radio = $("input[name=level][value=" + level + "]", editor);
 			radio.get(0).checked = true;
-		}else{
+		} else{
 			var radio = $("input[name=level][value=1]", editor);
 			radio.get(0).checked = true;
 			item.attr("type", "h1");
@@ -77,7 +77,7 @@ ceEditors['heading-block'] = {
                 'params': 'array( \'level\' => '+level+')',
                 'content_type_label': $(this).data('content-type'),
                 'status' : status,
-                'pagstructureid' : pagstructureid
+                'pagstructureid' : $('#script-pageId').val()
             },
 			function(data) {
 				ceEditors.defaultedt.saveorder( item, data);
@@ -86,7 +86,8 @@ ceEditors['heading-block'] = {
 			    	item.replaceWith(data);
 			    	$("li[dbid="+item.attr('dbid')+"]").makeEditable();
 			    });				
-			}
+			},
+            "json"
 		);
 	}
 };

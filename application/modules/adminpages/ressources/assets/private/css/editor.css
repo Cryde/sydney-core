@@ -1,0 +1,48 @@
+div.move{
+    float: left;
+    margin-left: -56px;
+}
+ul#pageContent{
+    list-style-type: none;
+}
+.addHere a{
+    visibility: hidden;
+    margin: 6px 0;
+    width: 100%;
+}
+div.addHere:hover a,
+div.addHere:focus a{
+    visibility: visible;
+}
+
+#pageContent li.panel{
+    padding: 6px;
+}
+
+li.panel-content{
+    background-color: #F8F8F8;
+    position: relative;
+}
+
+div.addContent{
+    margin-top: 10px;
+}
+
+/* action buttons */
+
+li.panel div.actions{
+    margin: 2px;
+    display: none;
+    position: absolute;
+    right: 4px;
+}
+
+li.panel:hover div.actions{
+    margin: 2px;
+    display: block;
+}
+
+/* ckeditor save action buttons */
+p.buttons{
+    margin-top: 10px;
+}

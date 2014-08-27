@@ -780,9 +780,6 @@ class Adminpages_ServicesController extends Sydney_Controller_Action
         if ('pages' == $this->eModule) {
             $divs = new Pagdivspage();
             $traceMsg = 'trace.event.update_content_pages';
-        } else {
-            $divs = new Pagdivsnews();
-            $traceMsg = 'trace.event.update_content_news';
         }
 
         $status = 0;

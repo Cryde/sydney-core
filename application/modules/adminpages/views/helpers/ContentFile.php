@@ -66,7 +66,6 @@ class Adminpages_View_Helper_ContentFile extends Zend_View_Helper_Abstract
 			<div class="content">
 				' . $this->view->partial('file/filelist.phtml', $module, $params2) . '
 			</div>
-			<p class="lastUpdatedContent sydney_editor_p">' . $eventsInfo['firstEvent'] . '<br />' . $eventsInfo['lastEvent'] . '</p>
 		</li>';
 
         return $toret;

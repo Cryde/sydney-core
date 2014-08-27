@@ -45,6 +45,7 @@
 				$('#ajaxbox').msgbox(data.ResultSet);
 			});
 	}
+
 	/**
 	 * Smart editor plugin for jquery.
 	 * This plugin manages the display of the 'add here buttons' and the events
@@ -65,7 +66,6 @@
             $(this).parents(".zone_name").next('.contentEditor').prepend(tempElm);
             $(this).buildAddContent({target: tempElm});
         });
-
 
 		return this.each(function(){
 
@@ -111,6 +111,8 @@
                     contentType: $(this).data('content-type')
 				});
 		    });
+
+
 
 			o.enable();
 
@@ -225,6 +227,7 @@
             newItem.data('content-type', options.contentType).data("new", true);
 
 			if(target != null){
+                console.log('kgjkljkljgdfg');
 				target.replaceWith(newItem);
 			} else{
 				var staticAddContent = $(".addContentStatic");

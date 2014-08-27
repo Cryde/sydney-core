@@ -32,9 +32,10 @@ class Adminpages_View_Helper_EditorText extends Zend_View_Helper_Abstract
 					<textarea class="texteditor">
 
 					</textarea>
-					<p class="buttons sydney_editor_p">
-						<a class="button sydney_editor_a" href="save">' . Sydney_Tools_Localization::_('Save as actual content') . '</a> <a class="button sydney_editor_a" href="save-draft">' . Sydney_Tools_Localization::_('Save as draft') . '</a>
-						<a class="button muted sydney_editor_a" href="cancel">' . Sydney_Tools_Localization::_('Cancel') . '</a>
+					<p class="buttons">
+						<a class="btn btn-success" href="save">' . Sydney_Tools_Localization::_('Save as actual content') . '</a>
+						<a class="btn btn-info" href="save-draft">' . Sydney_Tools_Localization::_('Save as draft') . '</a>
+						<a class="btn btn-default" href="cancel">' . Sydney_Tools_Localization::_('Cancel') . '</a>
 					</p>
 				</div>';
 

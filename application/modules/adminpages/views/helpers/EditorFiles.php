@@ -50,11 +50,11 @@ class Adminpages_View_Helper_EditorFiles extends Zend_View_Helper_Abstract
             ),
         );
 
-        $toReturn = '<div class="editor files edefiles file-block"><form><ul class="action-list sydney_editor_ul" data-content-type="file-block">';
+        $toReturn = '<div class="editor files edefiles file-block"><form><ul class="action-list sydney_editor_ul" data-content-type="file-block"><div class="row">';
         foreach ($mrt as $d) {
-            $toReturn .= '<li class="sydney_editor_li" fileparams="' . $d[2] . '"><h2 class="sydney_editor_h2">' . $d[0] . '<span class="subheading sydney_editor_span">' . $d[1] . '</span></h2></li>';
+            $toReturn .= '<div class="col-lg-3"><li fileparams="' . $d[2] . '"><div class="panel panel-warning"><div class="panel-heading"><span class="text-primary">' . $d[0] . ' </span><span class="small"> ' . $d[1] . '</span></div></div></li></div>';
         }
-        $toReturn .= '</ul></form></div>';
+        $toReturn .= '</div></ul></form></div>';
 
         return $toReturn;
     }

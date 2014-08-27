@@ -13,22 +13,23 @@ $pagstructure_id = $this->pagstructure_id;
     <input class="button bigwbutton" type="button" value="Save order"/>
 </div>
 <div class="ceUILibrary" style="display: none;">
-    <div class="addContent">
-        <p class="items sydney_editor_p">
-            <?php echo $this->EditorAddContentBar(); ?>
-        </p>
+    <div class="addContent addContentStatic panel panel-info">
+        <div class="panel-heading items">
+                <?php echo $this->EditorAddContentBar(); ?>
 
-        <p class="close sydney_editor_p"><a class="button sydney_editor_a"
-                                            href="#">Close</a></p>
+            <span class="close sydney_editor_p"><a class="button sydney_editor_a"
+                                                href="#"><i class="fa fa-times"></i></a></span>
+        </div>
     </div>
     <div class="addHere">
         <span class="ghost sydney_editor_span"></span>
-        <a class="sydney_editor_a" href="#" onclick="return false;">Add here</a>
+        <a class="btn btn-xs btn-default" href="#" onclick="return false;"><i class="fa fa-plus"></i></a>
     </div>
-    <div class="blankitem sydney_editor_li">
+    <li class="blankitem sydney_editor_li">
         <?php echo $this->EditorActions(); ?>
         <div class="content"></div>
-    </div>
+    </li>
+    <ul>
     <?php
     // print the result of the helpers
     foreach($this->customHelpers as $identifier => $customHelper){
@@ -36,11 +37,10 @@ $pagstructure_id = $this->pagstructure_id;
         echo $this->{$privateMethodToCall}($identifier);
     }
     ?>
+    </ul>
 </div>
 <div id="sydney_editor">
-    <ul id="pageContent" class="contentEditor sydney_editor_ul"
-        pagstructureid="<?= $pagstructure_id ?>">
-
+    <ul id="pageContent" class="contentEditor" pagstructureid="<?= $pagstructure_id ?>">
         <?php
         /*
          * @change GDE - 08/05/2014 - Content Translation
@@ -49,6 +49,7 @@ $pagstructure_id = $this->pagstructure_id;
         $this->contentTranslate = new Translate_Content_Content();
 
         foreach ($this->contentDivs as $div) {
+
             $coresp = new PagstructurePagdivs();
             $params = array('editLabel' => $div['label']);
             $isDeletable = true;
@@ -72,6 +73,7 @@ $pagstructure_id = $this->pagstructure_id;
             $div['content_draft'] = $this->contentTranslate->_($div['pagdivs_id'], $div['content_draft'], 'draft');
             $div['content'] = $this->contentTranslate->_($div['pagdivs_id'], $div['content']);
 
+            // Real content
             if (!empty($div['content_draft'])) {
                 $isDraft = true;
                 if (!empty($div['content'])) {
@@ -106,12 +108,12 @@ $pagstructure_id = $this->pagstructure_id;
             $tabs = '';
             if ($isDraft) { // tab only when draft content
                 $tabs = '
-			<div class="tabs" id="tabs-' . $div['pagdivs_id'] . '">
-			    <ul>
-			        <li id="draft-' . $div['pagdivs_id'] . '" class="draft active"><a href="' . $div['pagdivs_id'] . '">Draft</a></li>
-			        <li id="published-' . $div['pagdivs_id'] . '" class="published notactive"><a href="' . $div['pagdivs_id'] . '">Actual content</a></li>
-			    </ul>
-			</div>';
+            <div class="tabs" id="tabs-' . $div['pagdivs_id'] . '">
+                <ul>
+                    <li id="draft-' . $div['pagdivs_id'] . '" class="draft active"><a href="' . $div['pagdivs_id'] . '">Draft</a></li>
+                    <li id="published-' . $div['pagdivs_id'] . '" class="published notactive"><a href="' . $div['pagdivs_id'] . '">Actual content</a></li>
+                </ul>
+            </div>';
             }
 
             $paramsEditorAction = array(
@@ -142,16 +144,15 @@ $pagstructure_id = $this->pagstructure_id;
             );
         }
         ?>
-        <div class="panel panel-info addContentStatic">
-            <div class="panel-heading">
-                <?php echo $this->editorAddContentBar(); ?>
-            </div>
-        </div>
     </ul>
-
+    <div class="panel panel-info addContentStatic">
+        <div class="panel-heading">
+            <?php echo $this->editorAddContentBar(); ?>
+        </div>
+    </div>
 </div>
 
 
 
-<input type="hidden" value="<?php echo $this->pagid; ?>" id="script-pageId" />
-<input type="hidden" value="<?php echo $this->emodule; ?>" id="script-eModule" />
+<input type="hidden" value="<?= $this->pagid; ?>" id="script-pageId" />
+<input type="hidden" value="<?= $this->emodule; ?>" id="script-eModule" />

@@ -10,6 +10,18 @@ $(function(){
     });
 
     if($(".contentEditor").length > 0){
-        ANTIDOT.Registry.smartEditor = $(".contentEditor").smartEditor();
+       $(".contentEditor").smartEditor();
     }
+//    Used for pop windows when mouse is hover a pagediv content
+    $('li.panel').popover({
+        'placement': 'top',
+        'container': 'body',
+        'toggle': 'popover',
+        'html' : true,
+        trigger: 'hover'
+    });
+    /*
+    * 						data-container="body"
+     data-toggle="popover"
+     data-placement="left"*/
 })

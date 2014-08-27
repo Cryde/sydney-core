@@ -33,34 +33,34 @@ class Adminpages_View_Helper_EditorActions extends Zend_View_Helper_Abstract
 
         if (!(false == $isDeletable && false == $isDraft)) {
             if ($isDraft) {
-                $toReturn .= '<a class="btn btn-sm btn-success sydney_editor_a" href="publishdiv">Save as actual content</a> ';
+                $toReturn .= '<a class="btn btn-sm btn-success" href="publishdiv">Save as actual content</a> ';
             } else {
-                $toReturn .= '<a class="btn btn-sm btn-default sydney_editor_a" href="unpublishdiv">Save as draft</a> ';
+                $toReturn .= '<a class="btn btn-sm btn-info" href="unpublishdiv">Save as draft</a> ';
             }
             if (!$isDeletable) {
-                $toReturn .= '<a class="btn btn-sm btn-danger sydney_editor_a" href="rollback">Delete draft</a> ';
+                $toReturn .= '<a class="btn btn-sm btn-danger" href="rollback">Delete draft</a> ';
             } else {
                 if (!$isShared) {
-                    $toReturn .= '<a class="btn btn-sm btn-danger sydney_editor_a" href="delete">Delete</a> ';
+                    $toReturn .= '<a class="btn btn-sm btn-danger" href="delete">Delete</a> ';
                 }
             }
         }
-        $toReturn .= '<a class="btn btn-sm btn-primary sydney_editor_a" href="edit">Edit</a> ';
+        $toReturn .= '<a class="btn btn-sm btn-primary" href="edit">Edit</a> ';
         if ($workflowEnabled) {
-            $toReturn .= '<a class="btn btn-sm btn-default sydney_editor_a" href="workflowstatus">Change status</a> ';
+            $toReturn .= '<a class="btn btn-sm btn-default" href="workflowstatus">Change status</a> ';
         }
 
         if (!$isDraft) {
             if ($isOnline) {
-                $toReturn .= '<a id="offlinediv-' . $params['dbid'] . '" class="btn btn-sm btn-danger sydney_editor_a" href="#">Unpublish</a>';
+                $toReturn .= '<a id="offlinediv-' . $params['dbid'] . '" class="btn btn-sm btn-danger" href="#">Unpublish</a>';
             } else {
-                $toReturn .= '<a id="offlinediv-' . $params['dbid'] . '" class="btn btn-sm btn-success sydney_editor_a" href="#">Publish</a>';
+                $toReturn .= '<a id="offlinediv-' . $params['dbid'] . '" class="btn btn-sm btn-success" href="#">Publish</a>';
             }
         }
 
         $toReturn .= '</div>
-					<div class="move"><a class="button sydney_editor_a" title="Move" href="#">
-					<span class="sydney_editor_span">Move</span></a>
+					<div class="move"><a class="btn btn-primary btn-outline" title="Move" href="#">
+					<i class="fa fa-arrows"></i></a>
 					</div>';
 
         return $toReturn;

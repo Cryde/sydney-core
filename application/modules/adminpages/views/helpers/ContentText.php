@@ -26,13 +26,19 @@ class Adminpages_View_Helper_ContentText extends Zend_View_Helper_Abstract
                 data-content-type="text-block"
                 dborder="' . $order . '"
                 pagstructureid="' . $pagstructureId . '"
-                sharedinids="' . $sharedInIds . '">
+                sharedinids="' . $sharedInIds . '"
+                data-container="body" 
+                data-toggle="popover" 
+                data-placement="left" 
+                data-content="' . $eventsInfo['firstEvent'] . '<br />' . $eventsInfo['lastEvent'] . '">
 		' . $actionsHtml . '
 		<div class="content clearfix2">
 				' . $content . '
 		</div>
-		<p class="lastUpdatedContent sydney_editor_p">' . $eventsInfo['firstEvent'] . '<br />' . $eventsInfo['lastEvent'] . '</p>
 		</li>';
+
+
+
 
         return $toReturn;
     }

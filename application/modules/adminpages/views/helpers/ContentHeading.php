@@ -21,7 +21,7 @@ class Adminpages_View_Helper_ContentHeading extends Zend_View_Helper_Abstract
 
         $toReturn = '
         <li
-            class="' . $params['addClass'] . ' sydney_editor_li"
+            class="panel panel-content ' . $params['addClass'] . ' sydney_editor_li"
             type="h' . $params['level'] . '"
             editclass="heading"
             dbid="' . $dbId . '"
@@ -33,8 +33,7 @@ class Adminpages_View_Helper_ContentHeading extends Zend_View_Helper_Abstract
 		<div class="content clearfix2">
 			<h' . $params['level'] . ' class="sydney_editor_h' . $params['level'] . '">' . $content . '</h' . $params['level'] . '>
 		</div>
-		<p class="lastUpdatedContent sydney_editor_p">' . $eventsInfo['firstEvent'] . '<br />' . $eventsInfo['lastEvent'] . '</p>
-		</div>';
+		</li>';
 
         return $toReturn;
     }

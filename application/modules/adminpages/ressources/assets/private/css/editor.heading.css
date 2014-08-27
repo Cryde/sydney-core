@@ -1,0 +1,19 @@
+li.heading input,
+li.heading[type="h1"] input{
+    font-size: 40px;
+}
+li.heading[type="h2"] input{
+    font-size: 35px;
+}
+li.heading[type="h3"] input{
+    font-size: 30px;
+}
+li.heading[type="h4"] input{
+    font-size: 25px;
+}
+li.heading[type="h5"] input{
+    font-size: 20px;
+}
+li.heading[type="h6"] input{
+    font-size: 15px;
+}
