@@ -127,7 +127,8 @@ class Sydney_Form extends Zend_Form
             if($element instanceof Zend_Form_Element_Text
                 || $element instanceof Zend_Form_Element_Password
                 || $element instanceof Zend_Form_Element_Select
-                || $element instanceof Zend_Form_Element_Checkbox){
+                || $element instanceof Zend_Form_Element_Checkbox
+                || $element instanceof Zend_Form_Element_Textarea){
                 $element->setDecorators($this->elementDefaultDecorators);
                 $element->setAttrib('class', 'form-control');
             }

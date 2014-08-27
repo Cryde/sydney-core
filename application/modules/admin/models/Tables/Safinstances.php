@@ -40,12 +40,11 @@ class Safinstances extends SafinstancesOp
         'domain', // varchar(50)
         'description', // varchar(200)
         'languages_id', // bigint()
-        'secdomains', // text()
         'creationdate', // datetime()
         'offlinedate', // datetime()
         'active', // tinyint()
         'offlinemessage', // text()
-        'metatags', // text()
+        'metakeywords', // text()
     );
 
     protected $_metadata = array(

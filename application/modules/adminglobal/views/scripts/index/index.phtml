@@ -1,5 +1,5 @@
 
-<table class="adminglobal">
+<table class="table">
     <thead>
     <tr>
         <th>Id</th>
@@ -16,10 +16,13 @@
             <td><?= $webinstance->label ;?></td>
             <td><?= $webinstance->creationdate ;?></td>
             <td>
-                <a class="button" href="/adminglobal/index/editsafinstances/id/<?= $webinstance->id ?>">Edit</a>
-                <a class="button warning" href="/adminglobal/services/editsafinstances/format/json/id/<?= $webinstance->id ?>">Delete</a>
+                <a class="btn btn-xs btn-primary" href="/adminglobal/index/editsafinstances/id/<?= $webinstance->id ?>"><i class="fa fa-edit fa-fw"></i> Edit</a>
+                <a class="btn btn-xs btn-danger" href="/adminglobal/services/editsafinstances/format/json/id/<?= $webinstance->id ?>"><i class="fa fa-times fa-fw"></i> Delete</a>
             </td>
         </tr>
     <?php endforeach ?>
 </table>
 
+<h4 class="text-primary pull-right">
+    Manage your webinstances
+</h4>

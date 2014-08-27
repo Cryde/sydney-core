@@ -248,7 +248,7 @@ abstract class Sydney_Controller_Action extends Sydney_Controller_Actionpublic
     }
 
     /**
-     * Sets the sidebar to be used from the module adminsidebars
+     * Sets the sidebar to be used from the module adminsidebar
      *
      * @param $action
      * @param $controller
@@ -257,6 +257,11 @@ abstract class Sydney_Controller_Action extends Sydney_Controller_Actionpublic
     protected function setSideBar($action = 'index', $controller = 'index', $module = 'adminsidebars')
     {
         $this->layout->sidebaraction = array($action, $controller, $module);
+    }
+
+    protected function setTabsNav($action = 'index', $controller = 'index', $module = 'admintabnav')
+    {
+        $this->layout->tabsNavAction = array($action, $controller, $module);
     }
 
 

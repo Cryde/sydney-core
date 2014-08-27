@@ -209,7 +209,6 @@ class Sydney_Db_Table extends Zend_Db_Table
      * Returns the data in a YUI formated array for use with the YUI dataTable widget
      *
      * @param string|array|Zend_Db_Table_Select $where OPTIONAL An SQL WHERE clause or Zend_Db_Table_Select object.
-     * @param string|array $order OPTIONAL An SQL ORDER clause.
      * @param int $count OPTIONAL An SQL LIMIT count.
      * @param int $offset OPTIONAL An SQL LIMIT offset.
      * @param string $hidefields OPTIONAL List of fields to hide separated by a comma.
@@ -219,7 +218,7 @@ class Sydney_Db_Table extends Zend_Db_Table
      *
      * @todo TODO cache the count value
      */
-    public function fetchdatatoYUI($where = null, $order = null, $count = null, $offset = null, $hidefields = null, $group = null, $columns = null)
+    public function fetchdatatoYUI($where = null, $count = null, $offset = null, $hidefields = null, $group = null, $columns = null)
     {
         $result = $dataTranslation = array();
         $msql = 'SELECT count(*) as cnt FROM ' . $this->_schema . '.' . $this->_name;
@@ -239,9 +238,6 @@ class Sydney_Db_Table extends Zend_Db_Table
         $select = $this->select();
         if ($where !== null) {
             $select = $select->where($where);
-        }
-        if ($order !== null) {
-            $select = $select->order($order);
         }
         if ($count !== null || $offset !== null) {
             $select->limit($count, $offset);
@@ -338,19 +334,10 @@ class Sydney_Db_Table extends Zend_Db_Table
             $result[] = $dd;
         }
 
-        $srt = preg_split('/ /', $order);
-        if (isset($srt[1])) {
-            $dir = $srt[1];
-        } else {
-            $dir = 'ASC';
-        }
-
         return array(
             'recordsReturned' => count($result),
             'totalRecords'    => $totalRecords,
             'startIndex'      => $offset,
-            'sort'            => $srt[0],
-            'dir'             => $dir,
             'pageSize'        => $pageSize,
             'totalRecords'    => $totalRecords,
             'Result'          => $result

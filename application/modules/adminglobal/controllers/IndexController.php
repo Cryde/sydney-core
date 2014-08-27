@@ -12,7 +12,7 @@ class Adminglobal_IndexController extends Sydney_Controller_Action
     {
         parent::init();
         $this->setSubtitle('Global Admin');
-        $this->setSideBar('index', 'adminglobal');
+        $this->setTabsNav('index', 'adminglobal');
         $this->layout->langswitch = false;
         $this->layout->search = false;
     }
@@ -46,22 +46,10 @@ class Adminglobal_IndexController extends Sydney_Controller_Action
         // Main safinstance info form
         $form = new SafinstancesFormOp();
         $safform = $form->getMainform();
+        $safform->addDecoratorToElements();
 
-
-        if($r->isPost()){
-            $p = $r->getPost();
-            if($safform->isValid($p)) {
-                foreach ($p as $k => $v) {
-                    if (isset($safinstance->$k) && $k != 'id') {
-                        $safinstance->$k = $v;
-                    }
-                }
-                $safinstance->save();
-            }
-        } else {
-            if ($safinstance) {
-                $safform->populate($safinstance->toArray());
-            }
+        if ($safinstance) {
+            $safform->populate($safinstance->toArray());
         }
         $this->view->safinstancesForm = $safform;
     }

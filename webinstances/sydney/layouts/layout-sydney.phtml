@@ -163,11 +163,20 @@ $settingsNms = new Zend_Session_Namespace('appSettings');
             <!-- /.sidebar-collapse -->
         </div>
         </nav>
-        <div id="page-wrapper">
+
+        <div id="page-wrapper" class="current-page <?= $pprops[2]; ?>">
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header"><?php echo $trans->_($pprops[2]); ?></h1>
-                    <?php echo $this->layout()->content; ?>
+                    <?php
+                    if (isset($this->layout()->tabsNavAction)) {
+                        $sba = $this->layout()->tabsNavAction;
+                        echo $this->action($sba[0], $sba[1], $sba[2]);
+                    }
+
+                    // We display the content admin
+                    echo $this->layout()->content;
+                    ?>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
