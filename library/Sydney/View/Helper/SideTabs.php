@@ -38,10 +38,14 @@ class Sydney_View_Helper_SideTabs extends Zend_View_Helper_Abstract
 //        }
         $html .= '<ul class="nav nav-tabs">';
         foreach ($module as $actionName => $v) {
+            var_dump($currentActionName);
+            echo '<br>';
+            var_dump($actionName);
             if (preg_match('/^sep[0-9]{0,5}$/', $actionName)) {
                 $html .= '</ul><div class="pod"><h2>' . Sydney_Tools_Localization::_($v) . '</h2></div><ul id="localnav" class="clearfix">';
             } else {
                 $isActive = '';
+                echo '22222222222';
                 if ($currentActionName == $actionName) {
                     $isActive = 'active';
                 }

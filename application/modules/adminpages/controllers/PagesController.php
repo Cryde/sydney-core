@@ -34,7 +34,7 @@ class Adminpages_PagesController extends Sydney_Controller_Action
     public function indexAction()
     {
         $this->setSubtitle('Structure & Pages');
-        $this->setSideBar('index', 'pages');
+        $this->setTabsNav('index', 'adminpages');
         $this->layout->langswitch = true;
         $this->layout->search = true;
     }
@@ -44,6 +44,7 @@ class Adminpages_PagesController extends Sydney_Controller_Action
      */
     public function editAction()
     {
+        $this->setTabsNav('index', 'adminpages');
         // [AS] add CKEditor (moved from the global as it was using a lot of ressource)
         $this->view->headScript()->appendFile(Sydney_Tools::getRootUrlCdn() . '/sydneyassets/jslibs/ckeditor/ckeditor.js', 'text/javascript');
         $this->view->headScript()->appendFile(Sydney_Tools::getRootUrlCdn() . '/sydneyassets/jslibs/ckeditor/adapters/jquery.js', 'text/javascript');

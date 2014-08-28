@@ -33,7 +33,6 @@ class Adminpages_IndexController extends Sydney_Controller_Action
     public function indexAction()
     {
         $this->setSubtitle('Structure Editor');
-        $this->setSideBar('index', 'pages');
         $this->layout->langswitch = false;
         $this->layout->search = true;
         $pgs = new Pagstructure();
@@ -121,7 +120,7 @@ class Adminpages_IndexController extends Sydney_Controller_Action
             $this->view->editType = 'normal';
             $this->setSubtitle2($this->view->node->label);
             $this->setSubtitle('Properties');
-            $this->setSideBar('settings', 'pages');
+            $this->setTabsNav('properties', 'adminpages');
             $this->render('create');
         } else {
             $this->render('index');
@@ -149,7 +148,7 @@ class Adminpages_IndexController extends Sydney_Controller_Action
             $this->view->editType = 'advanced';
             $this->setSubtitle2($this->view->node->label);
             $this->setSubtitle('Advanced properties');
-            $this->setSideBar('settings', 'pages');
+            $this->setTabsNav('index', 'adminpages');
             $this->render('advancedproperties');
         } else {
             $this->render('index');
