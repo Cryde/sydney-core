@@ -45,7 +45,7 @@ ceEditors.defaultedt = {
 		//$('#ajaxbox').msgbox( {'message':'saving...'} );
 		$(".content", item).parent().attr('dbid', data.ResultSet.dbid);
 		$.post('/adminpages/services/updatepagerorder/format/json/emodule/'+ $('#script-eModule').val(), {
-				'jsondata': JSON.parse( $('#pageContent > li, .placeholder_zone > li').lidbids().toString() ),
+				'jsondata': '[' + $('#pageContent > li, .placeholder_zone > li').lidbids().toString() + ']',
 				'pagstructureid' : $('#pageContent').attr('pagstructureid')
 		},
 		function(data) {
@@ -60,7 +60,7 @@ ceEditors.defaultedt = {
 		if(item.parents('.zone').length){
 			var itemId = item.attr('dbid');
 			curZone = item.parents('.zone').attr('class').split(' ')[1];
-			$.postJSON(
+			$.post(
 				'/adminpages/services/updatezoneforpagdiv/format/json',{
 					'pagstructureid' : pagid,
 					'zone' : curZone,
@@ -68,7 +68,8 @@ ceEditors.defaultedt = {
 				},
 				function(data) {
 					$('#ajaxbox').msgbox(data.ResultSet);
-				}
+				},
+                'json'
 			);
 		}
 

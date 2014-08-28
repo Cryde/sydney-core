@@ -38,14 +38,14 @@ ceEditors['file-block'] = {
 		//$(".content", item).html(html);
 		item.removeEditor();
 		
-		$.postJSON('/adminpages/services/savediv/format/json/emodule/'+emodule, {
+		$.post('/adminpages/services/savediv/format/json/emodule/'+ $('#script-eModule').val(), {
 										'id': dbid,
 										'order': dborder,
 										'content': value,
 										'params': params,
                                         'content_type_label': $(this).data('content-type'),
 										'status' : status,
-										'pagstructureid' : pagstructureid
+										'pagstructureid' : $('#script-pageId').val()
 									},
 			function(data) {
 			    ceEditors.defaultedt.saveorder( item, data);
@@ -53,7 +53,8 @@ ceEditors['file-block'] = {
 				item.replaceWith(data);
 				$("li[dbid="+item.attr('dbid')+"]").makeEditable();
 			    });
-			}
+			},
+            'json'
 		);
 	},
 	/**
@@ -93,7 +94,7 @@ ceEditors['file-block'] = {
 			    );
 			} else {
 			    // Category
-			    $(this).parents(".editor").html('<p class="buttons"><a class="button" href="save">Save as actual content</a><a href="save-draft" class="button">Save as draft</a><a class="button muted" href="cancel">Cancel</a></p><div id="folders-categories"></div>');
+			    $(this).parents(".editor").html('<p class="buttons"><a class="btn btn-success" href="save">Save as actual content</a><a href="save-draft" class="btn btn-info">Save as draft</a><a class="btn btn-default" href="cancel">Cancel</a></p><div id="folders-categories"></div>');
 			    $("#folders-categories").foldermanager({
 				'title': 'Categories',
 				'cortable': 'filfolders_filfiles',

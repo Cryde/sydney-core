@@ -39,7 +39,7 @@ ceEditors.text = {
 										'order': dborder,
 										'content': myvalue,
 										'params': '',
-										'pagdivtypesid' : 2,
+										'pagdivtypesid' : item.data('content-type-id'),
 										'status' : status,
 										'pagstructureid' :  $('#script-pageId').val()
 									},

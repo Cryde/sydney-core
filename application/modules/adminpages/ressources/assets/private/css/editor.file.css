@@ -1,0 +1,7 @@
+
+ul.action-list{
+    list-style-type: none;
+}
+ul.action-list li{
+    cursor: pointer;
+}

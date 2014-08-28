@@ -40,16 +40,17 @@ ceEditors['plain-text-html-block'] = {
 		} else {
 			item.removeClass('draft');
 		}
+
 		
 		// post the data to the JSON service
-		$.postJSON('/adminpages/services/savediv/format/json/emodule/'+emodule, {
+		$.post('/adminpages/services/savediv/format/json/emodule/' + $('#script-eModule').val(), {
 										'id': dbid,
 										'order': dborder,
 										'content': value,
 										'params': '',
                                         'content_type_label': $(this).data('content-type'),
 										'status' : status,
-										'pagstructureid' : pagstructureid
+										'pagstructureid' : $('#script-pageId').val()
 									},
 			function(data) {
 				ceEditors.defaultedt.saveorder( item, data);
@@ -58,7 +59,7 @@ ceEditors['plain-text-html-block'] = {
 			    	item.replaceWith(data);
 			    	$("li[dbid="+item.attr('dbid')+"]").makeEditable();
 			    });			    				
-			}
+			}, 'json'
 		);
 	}
 };

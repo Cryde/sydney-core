@@ -1,12 +1,9 @@
 <?php echo $this->addiScript; ?>
 <?php if ($this->embed && !$this->ckeditor_context): ?>
-    <p class="buttons">
-        <a class="button"
-           href="save"><?= Sydney_Tools_Localization::_('Save as actual content') ?></a>
-        <a class="button"
-           href="save-draft"><?= Sydney_Tools_Localization::_('Save as draft') ?></a>
-        <a class="button muted"
-           href="cancel"><?= Sydney_Tools_Localization::_('Cancel') ?></a>
+    <p class="buttons col-lg-12">
+        <a class="btn btn-success" href="save"><?= Sydney_Tools_Localization::_('Save as actual content') ?></a>
+        <a class="btn btn-info" href="save-draft"><?= Sydney_Tools_Localization::_('Save as draft') ?></a>
+        <a class="btn btn-default" href="cancel"><?= Sydney_Tools_Localization::_('Cancel') ?></a>
     </p>
 <?php endif; ?>
 

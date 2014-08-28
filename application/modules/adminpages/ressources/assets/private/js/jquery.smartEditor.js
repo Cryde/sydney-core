@@ -115,7 +115,6 @@
 
 
 			o.enable();
-
 		});
 	};
 	/**
@@ -131,7 +130,6 @@
 			var items = o.children("li:not(.addContentStatic)");
 			if(items.length > 0){
 				// Add "Add here"
-				// var items = o.children("li");
 				var addHere = $(".ceUILibrary .addHere").clone();
 				items.after(addHere);
 				o.prepend(addHere);
@@ -227,7 +225,6 @@
             newItem.data('content-type', options.contentType).data("new", true);
 
 			if(target != null){
-                console.log('kgjkljkljgdfg');
 				target.replaceWith(newItem);
 			} else{
 				var staticAddContent = $(".addContentStatic");

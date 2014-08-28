@@ -190,9 +190,9 @@
 		   	contentEditor.buildAddHere();
 		   	
 			if (item[0].attributes['dbid']) var dbid = item[0].attributes['dbid'].nodeValue; else var dbid = 0;
-			$.postJSON('/adminpages/services/deletediv/format/json/emodule/'+emodule, {
+			$.post('/adminpages/services/deletediv/format/json/emodule/'+$('#script-eModule').val(), {
 											'id': dbid,
-											'pagstructureid' : pagstructureid
+											'pagstructureid' : $('#script-pageId').val()
 										},
 				function(data) {
 	    			$('#ajaxbox').msgbox(data.ResultSet);
@@ -213,14 +213,15 @@
 			// rollback item
 			var item = $(this);
 			if (item[0].attributes['dbid']) var dbid = item[0].attributes['dbid'].nodeValue; else var dbid = 0;
-			$.postJSON('/adminpages/services/rollbackdiv/format/json/emodule/'+emodule, { 'id': dbid, 'pagstructureid' : pagstructureid },
+			$.post('/adminpages/services/rollbackdiv/format/json/emodule/'+emodule, { 'id': dbid, 'pagstructureid' : $('#script-pageId').val() },
 				function(data) {
 				    $.get("/adminpages/services/getdivwitheditor/", {'dbid': data.ResultSet.dbid}, function(data){
 				    	item.replaceWith(data);
 				    	$("li[dbid="+item.attr('dbid')+"]").makeEditable();
 				    });
 	    			$('#ajaxbox').msgbox(data.ResultSet);
-				}
+				},
+                'json'
 			);
 		});
 	};
@@ -233,14 +234,15 @@
 		return this.each(function(){
 			var item = $(this);
 			if (item[0].attributes['dbid']) var dbid = item[0].attributes['dbid'].nodeValue; else var dbid = 0;
-			$.postJSON('/adminpages/services/publishdiv/format/json/emodule/'+emodule, { 'id': dbid, 'pagstructureid' : pagstructureid },
+			$.post('/adminpages/services/publishdiv/format/json/emodule/'+$('#script-eModule').val(), { 'id': dbid, 'pagstructureid' : $('#script-pageId').val() },
 				function(data) {
 				$.get("/adminpages/services/getdivwitheditor/", {'dbid': data.ResultSet.dbid}, function(data){
 				    	item.replaceWith(data);
 				    	$("li[dbid="+item.attr('dbid')+"]").makeEditable();
 			    });
 	    			$('#ajaxbox').msgbox(data.ResultSet);
-				}
+				},
+                'json'
 			);
 		});
 	};
@@ -253,14 +255,15 @@
 		return this.each(function(){
 			var item = $(this);
 			if (item[0].attributes['dbid']) var dbid = item[0].attributes['dbid'].nodeValue; else var dbid = 0;
-			$.postJSON('/adminpages/services/unpublishdiv/format/json/emodule/'+emodule, { 'id': dbid, 'pagstructureid' : pagstructureid },
+			$.post('/adminpages/services/unpublishdiv/format/json/emodule/'+$('#script-eModule').val(), { 'id': dbid, 'pagstructureid' : $('#script-pageId').val() },
 				function(data) {
                     $.get("/adminpages/services/getdivwitheditor/", {'dbid': data.ResultSet.dbid}, function(data){
                             item.replaceWith(data);
                             $("li[dbid="+item.attr('dbid')+"]").makeEditable();
                     });
                     $('#ajaxbox').msgbox(data.ResultSet);
-				}
+				},
+                'json'
 			);
 		});
 		
@@ -274,7 +277,7 @@
         return this.each(function(){
             var item = $(this);
             if (item[0].attributes['dbid']) var dbid = item[0].attributes['dbid'].nodeValue; else var dbid = 0;
-            $.postJSON('/adminpages/services/toggleonline/format/json/emodule/'+emodule, { 'id': dbid, 'pagstructureid' : pagstructureid },
+            $.post('/adminpages/services/toggleonline/format/json/emodule/'+$('#script-eModule').val(), { 'id': dbid, 'pagstructureid' : $('#script-pageId').val() },
                 function(data) {
                     $.get("/adminpages/services/getdivwitheditor", {'dbid': data.ResultSet.dbid},
                         function(data) {
@@ -283,7 +286,8 @@
                         }
                     );
                     $('#ajaxbox').msgbox(data.ResultSet);
-                }
+                },
+                'json'
             );
         });
     };
@@ -297,7 +301,7 @@
         return this.each(function(){
             var item = $(this);
             if (item[0].attributes['dbid']) var dbid = item[0].attributes['dbid'].nodeValue; else var dbid = 0;
-            $.postJSON('/adminpages/services/duplicate/format/json/emodule/'+emodule, { 'id': dbid, 'pagstructureid' : pagstructureid },
+            $.post('/adminpages/services/duplicate/format/json/emodule/'+$('#script-eModule').val(), { 'id': dbid, 'pagstructureid' : $('#script-pageId').val() },
                 function(data) {
             		var new_dbid	= data.ResultSet.dbid;
                     $.get("/adminpages/services/getdivwitheditor", {'dbid': data.ResultSet.dbid},
@@ -307,7 +311,8 @@
                         }
                     );
                     $('#ajaxbox').msgbox(data.ResultSet);
-                }
+                },
+                'json'
             );
         });
     };

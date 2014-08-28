@@ -146,7 +146,7 @@
 	 */
 	function upgearsDoit( elid, bfrom )
 	{
-		$.log(elid+':'+bfrom);
+		//$.log(elid+':'+bfrom);
 		var blength = (8*1024);
 		var btotall = filelist[elid].blob.length;
 		if ( (bfrom+blength) > btotall) blength=btotall-bfrom;

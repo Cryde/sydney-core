@@ -51,7 +51,7 @@ ceEditors['view-embedder-block'] = {
                 'params': '',
                 'content_type_label': $(this).data('content-type'),
                 'status' : status,
-                'pagstructureid' : pagstructureid
+                'pagstructureid' : $('#script-pageId').val()
             },
 			function(data) {
 				ceEditors.defaultedt.saveorder( item, data);
@@ -60,7 +60,8 @@ ceEditors['view-embedder-block'] = {
 			    	item.replaceWith(data);
 			    	$("li[dbid="+item.attr('dbid')+"]").makeEditable();
 			    });				
-			}
+			},
+            'json'
 		);
 	}
 };

@@ -30,7 +30,7 @@ class Adminpages_View_Helper_ContentFreeText extends Zend_View_Helper_Abstract
         $secureContent = htmlspecialchars($content);
         $contentToDisplay = nl2br(htmlspecialchars(substr($content, 0, 200) . ' ...'));
 
-        $toReturn = '<li class="' . $params['addClass'] . ' sydney_editor_li"
+        $toReturn = '<li class="' . $params['addClass'] . ' sydney_editor_li panel panel-content"
 						type="' . $params['language'] . '"
                         data-content-type="plain-text-html-block"
 						editclass="freetext"
