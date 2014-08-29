@@ -22,44 +22,21 @@ function _HTMLfolderStructure($s)
         }
         $catcntr--;
     }
-
     return $html;
 }
-
 $catcntr = 0;
-
-?><!-- Load the queue CSS -->
-<style
-    type="text/css">@import url(<?=Sydney_Tools_Paths::getRootUrlCdn();?>/sydneyassets/jslibs/jquery/plugins/plupload/plupload.queue.css);</style>
-
-
-<!-- Load plupload and all it's runtimes and finally the jQuery queue widget -->
-<script type="text/javascript"
-        src="<?= Sydney_Tools_Paths::getRootUrlCdn(); ?>/sydneyassets/jslibs/jquery/plugins/plupload/plupload.full.min.js"></script>
-<script type="text/javascript"
-        src="<?= Sydney_Tools_Paths::getRootUrlCdn(); ?>/sydneyassets/jslibs/jquery/plugins/plupload/jquery.plupload.queue.min.js"></script>
-
-<style>
-    div.catcontainer {
-        padding: 10px;
-    }
-
-    div.catcontainer div.categoryPlaceholder {
-        border: 1px solid #AAA;
-        background-color: #FFF;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-</style>
+?>
+<a class="btn btn-primary"><i class="fa fa-reply fa-fw"></i> Back</a>
 <form method="post" action="#">
     <div class="catcontainer">
-        <a href="categoryButton">Link to category</a>
-
+        <div class="col-lg-offset-10">
+            <a class="btn btn-lg btn-default" href="categoryButton"><i class="fa fa-link fa-fw"></i> Link to category</a>
+        </div>
         <div
             class="categoryPlaceholder"><?= _HTMLfolderStructure($this->categories); ?></div>
     </div>
 
-    <div id="uploader" style="height: 330px;">
+    <div id="uploader">
         <p><?= Sydney_Tools_Localization::_('Your browser doesn\'t have Flash, Silverlight or HTML5 support.') ?></p>
     </div>
 

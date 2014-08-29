@@ -258,7 +258,7 @@ class PagstructureOp extends Sydney_Db_Table
             ->where('safinstances_id = ?', Sydney_Tools::getSafinstancesId())
             ->where('isDeleted = ?', 1)
             ->order('pagorder ASC')->order('datemodified DESC');
-
+        var_dump(count($this->fetchAll($selector)));
         foreach ($this->fetchAll($selector) as $row) {
             if (!$this->isNodeLoaded($row->id)) {
                 $isCollapsed = false;

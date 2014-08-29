@@ -2,8 +2,13 @@
     <div class="sydney_editor_toolbar">
         <div id="padfiledrmenu"></div>
     </div>
+
+    <div id="tree">
+        <ul id="treeData">
 <?php
 if (is_array($this->structureArray)) {
     echo $this->structureEditor($this->structureArray);
 }
 ?>
+            </ul>
+    </div>

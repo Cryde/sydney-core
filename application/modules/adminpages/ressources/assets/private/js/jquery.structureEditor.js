@@ -100,8 +100,8 @@
 				datas = {'dbId': dbId, 'src':'recyclebin'};
 			}
 			
-			$.postJSON(	'/adminpages/services/deletenode/format/json', 
-						{'jsondata': $.toJSON( datas )},
+			$.post(	'/adminpages/services/deletenode/format/json',
+                        {'jsondata':  '"'+datas+'"' },
 						function(data) {
 							$('#ajaxbox').msgbox(data.ResultSet);
                                 if (datas.hasOwnProperty('src')) {
@@ -124,7 +124,8 @@
                                     } else nbnsb.text((nbno+1)+' node(s)');
                                     hideAction();
                                 }
-						}
+						},
+                        'json'
 			);
 		}
 	};
@@ -164,8 +165,8 @@
 		
                 var dynatreenode = false;
                 if (typeof(pagstructureid) == "undefined") {
-                    var dynatree		= $("#viewcontent").dynatree("getTree");
-                    dynatreenode 	= dynatree.getNodeByKey($(node).attr('dbid'));
+//                    var dynatree		= $("#viewcontent").dynatree("getTree");
+//                    dynatreenode 	= dynatree.getNodeByKey($(node).attr('dbid'));
                 }
 		
 		var dbid = $(node).attr('dbid');
@@ -174,8 +175,8 @@
 		} else {
 			//Contact us (Status: draft , View: 0)
 			$('#ajaxbox').msgbox( {'message': 'Publishing...', 'showtime':0,'modal':true} );
-			$.postJSON('/adminpages/services/publishpage/format/json', 	
-					{'jsondata': $.toJSON( {'dbId': dbid} )},
+			$.post('/adminpages/services/publishpage/format/json',
+					{'jsondata': '{"dbId": "'+dbid+'"}' },
 					function(data) {
 						$('#ajaxbox').msgbox(data);
 						if (dynatreenode) {
@@ -191,7 +192,8 @@
 						}
 						var btnPublish = $('#btn_publish_' + data.dbid).removeClass('publish').addClass('unpublish').text('Unpublish').unbind().click(function(event){unpublishnode(event, $('#btn_publish_' + data.dbid));});
 						hideAction();
-					}
+					},
+                'json'
 			);
 		}
 	};	
@@ -207,7 +209,7 @@
 		
                 var dynatreenode = false;
                 if (typeof(pagstructureid) == "undefined") {
-                    var dynatree		= $("#viewcontent").dynatree("getTree");
+                    var dynatree		= $("#viewcontent").tree("getTree");
                     dynatreenode 	= dynatree.getNodeByKey($(node).attr('dbid'));
                 }
 		
@@ -251,8 +253,7 @@
            var dynatree = $('#viewcontent').dynatree("getTree");
            var dbid = $(node).attr('dbid');
            
-           $.postJSON(
-               '/adminpages/services/duplicatenode/format/json',
+           $.post('/adminpages/services/duplicatenode/format/json',
                {
                    'jsondata' : $.toJSON( {'dbId': dbid} )
                },
@@ -269,12 +270,12 @@
 	function emptyCache( mode )
 	{
 		$('#ajaxbox').msgbox( {'message': 'Processing...', 'showtime':0,'modal':true} );
-		$.postJSON('/adminpages/services/emptycache/format/json', {
-										'jsondata': $.toJSON( {'mode': mode} )
+		$.post('/adminpages/services/emptycache/format/json', {
+										'jsondata': '{"mode": "'+mode+'"}'
 									},
 			function(data) {
 				$('#ajaxbox').msgbox(data.ResultSet);
-			});
+			}, 'json');
 	};
 	/**
 	 * Empty the cache for the structure
@@ -284,56 +285,37 @@
 	function cache4all( mode )
 	{
 		$('#ajaxbox').msgbox( {'message': 'Processing...', 'showtime':0,'modal':true} );
-		$.postJSON('/adminpages/services/setcacheall/format/json', {
-										'jsondata': $.toJSON( {'caching': mode} )
+		$.post('/adminpages/services/setcacheall/format/json', {
+										'jsondata': '{"caching": "'+mode+'"}'
 									},
 			function(data) {
 				$('#ajaxbox').msgbox(data.ResultSet);
-			});
+			},
+            'json');
 	};
-	/**
-	 * Exand and collapse all according to the param passed as arg.
-	 * @param exp Boolean - true = expand | false = collapse
-	 * @memberOf $.fn.structureEditor
-	 */
-	function expcol( exp )
-	{
-		if (exp) var vs = ['collapsed','expanded'];
-		else var vs = ['expanded','collapsed'];
-		$('ul', $('.tree') ).each(function(){
-			var ul = $(this);
-			var li = $(ul.parent("li").get(0));
-			var row = $(">.row", li);
-			row.children('.bullet').each(function(){
-			    $(this).removeClass(vs[0]);
-				$(this).addClass(vs[1]);
-				var li2 = $(this).parents("li").get(0);
-				var ul2 = $(">ul", li2);
-				if (exp) ul2.slideDown("fast");
-				else ul2.slideUp("fast");
-			});
-		});		
-	};
+
 	/**
 	 * Collapse all the nodes of the tree
 	 * @memberOf $.fn.structureEditor
 	 */
 	function collapseAll(e)
 	{
-		$('#viewcontent').dynatree("getRoot").visit(function(node){
-	          node.expand(false);
-	    });
-	};
+        $("#tree").fancytree("getRootNode").visit(function(node){
+            node.setExpanded(false);
+        });
+
+    };
 	/**
 	 * Expand all the nodes of the tree
 	 * @memberOf $.fn.structureEditor
 	 */
 	function expandAll(e)
-	{
-		$('#viewcontent').dynatree("getRoot").visit(function(node){
-	          node.expand(true);
-	    });
-	};
+    {
+        $("#tree").fancytree("getRootNode").visit(function(node){
+            node.setExpanded(true);
+        });
+
+    };
 	/**
 	 * 
 	 * @memberOf $.fn.structureEditor
@@ -376,7 +358,6 @@
 		// GDE - 20/08/2013 - Bugfix: erreur js au survol - ne trouve pas le node
 		if (typeof node !== 'undefined') {
 			var dbid	= node.data.key;
-			var e		= event;
 			var epos = $(myobject).position();
 
 			epos.top = Math.round(epos.top) - 3;
@@ -477,7 +458,7 @@
 	$.fn.structureEditor = function()
 	{
         $(document).tooltip({
-            items: ".dynatree-container li",
+            items: ".fancytree-container li",
             position: { my: "right bottom", at: "right top", collision: "flipfit" },
             content: function(){
                 var txt = $('.tooltip-infos',$(this)).html()
@@ -516,8 +497,8 @@
 			activeAction();
 			
 			if (typeof(pagstructureid) == "undefined") {// this var is defined on edit page 
-				$.ui.dynatree.nodedatadefaults["icon"] = false; // Turn off icons by default
-				$('#viewcontent').dynatree({
+				//$.ui.fancytree.nodedatadefaults["icon"] = false; // Turn off icons by default
+				$('#viewcontent').fancytree({
 					fx: {height: "toggle", duration: 200},
 	    	        autoCollapse: false,
 	    	        persist: true,
@@ -563,7 +544,7 @@
 						},
 						onDragLeave: function(node, sourceNode) {}
 					},
-					debugLevel: 0							
+					debugLevel:2
 		    	});// END - $("#tree",maind).dynatree	
 				initAction();
 			}

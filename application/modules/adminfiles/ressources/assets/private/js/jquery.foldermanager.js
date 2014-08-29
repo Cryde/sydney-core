@@ -214,7 +214,8 @@
 				maind.html(thtml, maind);
 				
 				$.ui.dynatree.nodedatadefaults["icon"] = false; // Turn off icons by default
-				$("#tree",maind).dynatree({
+				$("#tree",maind).fancytree({
+                    extensions: ["persistence", "dnd"],
 					'debugLevel': 0,
 		    		'fx': { height: "toggle", duration: 200 },
 	    	        'autoCollapse': false,

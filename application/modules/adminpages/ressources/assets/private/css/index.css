@@ -1,10 +1,31 @@
-.tree tr .adminpages_action_container{
+#tree li .adminpages_action_container{
     visibility:hidden;
     text-align:right;
 }
-.tree tr:hover .adminpages_action_container{
-    visibility: visible;
+#tree li:hover > span{
+    background-color: rgba(240,245,250,0.5);
 }
-.tree tr:hover{
+#tree .fancytree-title .labelname{
+    padding: 7px 0;
+    display: inline-block;
+}
+
+.fancytree-expander.glyphicon.glyphicon-minus-sign,
+.fancytree-expander.glyphicon.glyphicon-minus-sign {
+    margin-top: 10px;
+}
+
+#tree .fancytree-container.fancytree-treefocus span.fancytree-node:hover .adminpages_action_container{
+    visibility: visible;
+    position: absolute;
+    right: 0;
+    top:0px;
+}
+
+#tree .fancytree-container.fancytree-treefocus span.fancytree-node:hover{
     background-color: #F0F5FA;
+}
+
+#tree ul li{
+    position: relative;
 }

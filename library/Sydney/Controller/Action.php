@@ -254,10 +254,9 @@ abstract class Sydney_Controller_Action extends Sydney_Controller_Actionpublic
      * @param $controller
      * @return void
      */
-    //TODO delete setSideBar function
-    protected function setSideBar($action = 'index', $controller = 'index', $module = 'adminsidebars')
+    protected function setSideTabs($action = 'index', $controller = 'index', $module = 'adminsidetab')
     {
-        $this->layout->sidebaraction = array($action, $controller, $module);
+        $this->layout->sideBarAction = array($action, $controller, $module);
     }
 
     protected function setTabsNav($action = 'index', $controller = 'index', $module = 'admintabnav')

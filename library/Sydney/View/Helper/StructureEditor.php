@@ -57,26 +57,24 @@ class Sydney_View_Helper_StructureEditor extends Zend_View_Helper_Abstract
         $grpDB = new Usersgroups();
         $this->groups = $grpDB->fetchLabelstoFlatArray();
         $this->addNodes($structureArray);
-        return '<table class="table tree table-condensed">'.$this->toReturn.'</table>';
+        return $this->toReturn;
     }
 
     /**
      * Add an array of nodes
      * @param array $nodes
-     * @param bool $sub
+     * @param bool $hasChild
      * @param int $parentDbId
      * @param bool $firstCall
      */
-    private function addNodes($nodes = array(), $sub = false, $parentDbId = 0, $firstCall = true)
+    private function addNodes($nodes = array(), $hasChild = false, $parentDbId = 0, $firstCall = true, $isChild = 0)
     {
+        if (!$hasChild) {
+
+        } else {
+            $this->toReturn .= $this->getTabs() . '<ul dbid="' . $parentDbId . '" class="">';
+        }
         foreach ($nodes as $node) {
-
-
-            if (!$sub) {
-                $this->toReturn .= $this->getTabs() . '<tr class="ui-sortable treegrid-'.$node['id'].'" id="sitemap" dbid="' . $parentDbId . '">';
-            } else {
-                $this->toReturn .= $this->getTabs() . '<tr dbid="' . $parentDbId . '" class="treegrid-'.$node['id'].' treegrid-parent-'.$parentDbId.'">';
-            }
             $pagorder = 0;
             if (isset($node['pagorder'])) {
                 $pagorder = $node['pagorder'];
@@ -91,41 +89,50 @@ class Sydney_View_Helper_StructureEditor extends Zend_View_Helper_Abstract
                 $alertContentDraft = ' , Draft: ' . $this->listDraftContentByPage[$node['id']];
             }
             $this->toReturn .=
-                '<td
-                    class="treegrid-'. $pagorder. ' ' . ($node['ishome'] == 1 ? 'selected' : '') . '"
+                '<li
+                    class="col-lg-12 ' . ($node['ishome'] == 1 ? 'selected' : '') . '"
                     id="' . $node['id'] . '"
                     data="{addClass: \'' . $node['status'] . ' permspicto ' . $this->groups[($node['usersgroups_id'])] . '\',url: \'/adminpages/pages/edit/id/' . $node['id'] . '\',noLink:' . ($this->isRedirected($node) ? 'true' : 'false') . '}"
                     id="structure_' . $node['id'] . '"
                     dbid="' . $node['id'] . '"
                     dborder="' . $pagorder . '">
 
-                        <a href="/adminpages/pages/edit/id/' . $node['id'] . '">'
-                            . $node['label'] .
-                        '</a>
+                        <div class="col-lg-8">
+                            <div class="col-lg-7">
+                                <a class="labelname" href="/adminpages/pages/edit/id/' . $node['id'] . '">
+                                '.$this->getIshomepageHtml($node['ishome']).'
+                                '.$this->getIsRedirected($node).'
+                                ' . $node['label'] .
+                                '</a></div>
 
-                    </td>
-                    <td class="dynatree-title-detail"><h6 class="text-muted">(Status: ' . $node['status'] .
-                ' , View: ' . (int) $node['stats']['views'] . $alertContentDraft;
+                   ';
 
-            $this->toReturn .= ')' . $this->getDataNodeAsHtml($node) . $this->getIshomepageHtml($node['ishome']) . $this->getIsRedirected($node);
-            $this->toReturn .= '</h6> </td>';
+            $this->toReturn .= $this->getDataNodeAsHtml($node);
+            $this->toReturn .= '</div>';
 
             // prefix the structure content by action
             $strAction = $this->getActionsHtml($node['id'], $node['ishome'], $node['status'], $node);
-            $this->toReturn .= '<td>'.$strAction.'</td>';
+            $this->toReturn .= ''.$strAction.'';
 
-            if (!$sub && $this->hasNodeRestored && $node['status'] != 'restored') {
+            if (!$hasChild && $this->hasNodeRestored && $node['status'] != 'restored') {
                 $this->hasNodeRestored = false;
             }
-            $this->toReturn .= '</td>';
 
             if (count($node['kids']) > 0) {
                 $this->addNodes($node['kids'], true, $node['id'], false);
             }
 
-            $this->toReturn .= '</tr>';
+            $this->toReturn .= '</li>';
+
+
+
+
 
         } // END Foreach
+        $this->toReturn .= '</ul>';
+        if ($firstCall) {
+            $this->toReturn .= $this->strAction;
+        }
     }
 
     /**
@@ -143,7 +150,7 @@ class Sydney_View_Helper_StructureEditor extends Zend_View_Helper_Abstract
     private function getIsRedirected($node)
     {
         if ($this->isRedirected($node)) {
-            return ' <img src="' . $this->view->cdn . '/sydneyassets/images/icons/redirect.png" alt="Page redirected" title="Page redirected" />';
+            return '<i class="fa fa-share"></i>';
         }
     }
 
@@ -154,7 +161,7 @@ class Sydney_View_Helper_StructureEditor extends Zend_View_Helper_Abstract
      */
     private function getIshomepageHtml($isit = 0)
     {
-        return ($isit == 1) ? '<span class="capsule">Homepage</span>' : '';
+        return ($isit == 1) ? '<i class="fa fa-home fa-fw"></i>' : '';
     }
 
     /**
@@ -255,7 +262,7 @@ class Sydney_View_Helper_StructureEditor extends Zend_View_Helper_Abstract
 
         $hidit = ($ishome == 1) ? ' invisible' : '';
         $btnStatus = ($status != 'published') ? 'publish' : 'unpublish';
-        $toret = '<div id="adminpageaction-' . $dbid . '" class="adminpages_action_container">';
+        $toret = '<div id="adminpageaction-' . $dbid . '" class="col-lg-4 pull-right adminpages_action_container">';
         $toret .= '
         <div class="actionsContainer">
             <span class="actions">
