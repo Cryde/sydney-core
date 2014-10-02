@@ -182,7 +182,7 @@ abstract class Sydney_Controller_Action extends Sydney_Controller_Actionpublic
     protected function setupScripts()
     {
         // @todo TODO change that for i18n according to the language
-        $this->view->headScript()->appendFile($this->view->cdn . '/sydneyassets/scripts/i18n/en.js', 'text/javascript');
+        $this->view->headScript()->appendFile($this->view->cdn . '/sydneyassets/js/i18n/en.js', 'text/javascript');
         $this->view->headScript()->appendFile($this->view->cdnurl . $this->jscripts[0], 'text/javascript');
     }
 

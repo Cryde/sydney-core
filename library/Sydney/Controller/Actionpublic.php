@@ -138,7 +138,7 @@ abstract class Sydney_Controller_Actionpublic extends Zend_Controller_Action
         if (isset($this->_config->general->lang) && $this->_config->general->lang != '') {
             $llg = $this->_config->general->lang;
         }
-        $this->view->headScript()->appendFile($this->view->cdn . '/sydneyassets/scripts/i18n/' . $llg . '.js', 'text/javascript');
+        $this->view->headScript()->appendFile($this->view->cdn . '/sydneyassets/js/i18n/' . $llg . '.js', 'text/javascript');
 
         // setup some layout vars
         if ($this->layout !== null) {
